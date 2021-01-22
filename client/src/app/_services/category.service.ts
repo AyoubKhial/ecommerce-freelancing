@@ -29,6 +29,10 @@ export class CategoryService {
         return this.http.get<ICategory[]>(API_URL);
     }
 
+    create(data: Partial<ICategory>): Observable<ICategory> {
+        return this.http.post<ICategory>(API_URL, data);
+    }
+
     update(id: number, data: Partial<ICategory>): Observable<{ message: string }> {
         return this.http.put<{ message: string }>(`${API_URL}${id}`, data);
     }

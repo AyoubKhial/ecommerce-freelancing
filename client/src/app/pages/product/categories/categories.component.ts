@@ -28,6 +28,7 @@ export class CategoriesComponent implements OnInit {
 	];
 
 	public categories: ICategory[];
+	public category: Partial<ICategory> = {};
 	private selectedRows: ICategory[];
 
 	constructor(private categoryService: CategoryService) {}
@@ -45,6 +46,11 @@ export class CategoriesComponent implements OnInit {
 
 	public onSelectionChanged = (event: any): void => {
     	this.selectedRows = event.api.getSelectedRows();
+	}
+
+	public add = (): void => {
+		console.log(this.category);
+		this.createCategory(this.category);
 	}
 
 	public remove = (): void => {
@@ -68,6 +74,12 @@ export class CategoriesComponent implements OnInit {
 
 	private deleteCategory = (id: number): void => {
 		this.categoryService.delete(id).subscribe();
+	}
+
+	private createCategory = (category: Partial<ICategory>): void => {
+		this.categoryService.create(category).subscribe(category => {
+			this.categories = [...this.categories, category];
+		});
 	}
 }
 
