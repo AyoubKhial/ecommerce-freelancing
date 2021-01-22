@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { AgGridAngular } from 'ag-grid-angular';
-import { CategoryService } from 'src/app/_services/category.service';
+import { CategoryService, ICategory } from 'src/app/_services/category.service';
 
 @Component({
 	selector: 'app-categories',
@@ -28,7 +27,8 @@ export class CategoriesComponent implements OnInit {
 		{ field: 'keywords' }
 	];
 
-	public categories: any;
+	public categories: ICategory[];
+	private selectedRows: ICategory[];
 
 	constructor(private categoryService: CategoryService) {}
 
@@ -36,26 +36,38 @@ export class CategoriesComponent implements OnInit {
 		this.getCategories();
 	}
 
+	public onCellValueChanged = (event: any): void => {
+		console.log(event);
+		const id = event.data.id;
+		const data = { [event.colDef.field]: event.newValue };
+		this.updateCategory(id, data);
+	}
+
+	public onSelectionChanged = (event: any): void => {
+    	this.selectedRows = event.api.getSelectedRows();
+	}
+
+	public remove = (): void => {
+		if (this.selectedRows && confirm('Are you sure you want to delete the data selected ?')) {
+			const ids = this.selectedRows.map(row => row.id);
+			for (const id of ids) this.deleteCategory(id);
+			this.categories = this.categories.filter(category => !ids.includes(category.id));
+			this.selectedRows = [];
+		}
+	}
+
 	private getCategories = (): void => {
 		this.categoryService.find().subscribe(categories => {
-			console.log(categories);
 			this.categories = categories;
-			console.log(this.categories);
-		})
-	}
-
-	getSelectedRows() {
-		const selectedNodes = this.agGrid.api.getSelectedNodes();
-		const selectedData = selectedNodes.map(node => {
-			if (node.groupData) {
-				return { firstName: node.key, model: 'Group' };
-			}
-			return node.data;
 		});
-		const selectedDataStringPresentation = selectedData.map(node => node.firstName + ' ' + node.subName).join(', ');
-
-		alert(`Selected nodes: ${selectedDataStringPresentation}`);
 	}
 
+	private updateCategory = (id: number, data: Partial<ICategory>): void => {
+		this.categoryService.update(id, data).subscribe();
+	}
+
+	private deleteCategory = (id: number): void => {
+		this.categoryService.delete(id).subscribe();
+	}
 }
 
