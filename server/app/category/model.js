@@ -21,10 +21,11 @@ module.exports = (sequelize, Sequelize) => {
         keywords: {
             type: Sequelize.STRING,
             get() {
-                return this.getDataValue('keywords').split(',')
+                return this.getDataValue('keywords')?.split(',')
             },
             set(val) {
-               this.setDataValue('keywords', val.join(','));
+                if (Array.isArray(val)) this.setDataValue('keywords', val.join(','));
+                else this.setDataValue('keywords', val);
             }
         },
         explanation: {
