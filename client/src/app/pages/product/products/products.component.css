@@ -1,0 +1,13 @@
+.main {
+    margin-top: 70px;
+}
+
+.ngx-datatable {
+    height: 600px;
+    width: 100%;
+    border: 1px solid #ccc !important;
+}
+
+.search {
+    box-shadow: 0 2px 2px #40404e6c !important;
+}

@@ -1,0 +1,73 @@
+<div id="app">
+  <nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="tokenStorageService.isLoggedIn">
+    <a href="javascript: void(0)" routerLink = "home" class="navbar-brand offset-1"><img class="logo" src="../assets/img/logo/logo.png"></a>
+    <ul class="navbar-nav ml-auto" routerLinkActive="active">
+      <!-- <li class="nav-item">
+        <a href="/home" class="nav-link" routerLink="home">Home </a>
+      </li>
+      <li class="nav-item" *ngIf="showAdminBoard">
+        <a href="/admin" class="nav-link" routerLink="admin">Admin Board</a>
+      </li>
+      <li class="nav-item" *ngIf="showModeratorBoard">
+        <a href="/mod" class="nav-link" routerLink="mod">Moderator Board</a>
+      </li>
+      <li class="nav-item">
+        <a href="/user" class="nav-link" *ngIf="isLoggedIn" routerLink="user">User</a>
+      </li> -->
+
+      <li class="nav-item mx-3">
+        <a class="nav-link font-weight-bold" routerLink="profile"><i
+            class="fa fa-user"></i>&nbsp;&nbsp;Welcome {{username}}</a>
+      </li>
+      <li class="nav-item mx-3">
+        <a class="nav-link font-weight-bold"><i class="fa fa-flag"></i>&nbsp;&nbsp;Support
+          System</a>
+      </li>
+      <li class="nav-item mx-3">
+        <a class="nav-link font-weight-bold"><i
+            class="fa fa-question"></i>&nbsp;&nbsp;Help</a>
+      </li>
+      <li class="nav-item mx-3">
+        <a class="nav-link font-weight-bold"><i class="fa fa-eye"></i>&nbsp;&nbsp;Site
+          Preview</a>
+      </li>
+      
+      <li class="nav-item mx-3 mr-5">
+        <a class="nav-link font-weight-bold" (click)="logout()"><i
+            class="fa fa-power-off"></i>&nbsp;&nbsp;Safe Exit</a>
+      </li>
+    </ul>
+
+    <!-- <ul class="navbar-nav ml-auto" *ngIf="!isLoggedIn">
+      <li class="nav-item">
+        <a href="/register" class="nav-link" routerLink="register">Sign Up</a>
+      </li>
+      <li class="nav-item">
+        <a href="/login" class="nav-link" routerLink="login">Login</a>
+      </li>
+    </ul> -->
+
+    <!-- <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn">
+      <li class="nav-item">
+        <a href="/profile" class="nav-link" routerLink="profile">{{ username }}</a>
+      </li>
+      <li class="nav-item">
+        <a href class="nav-link" (click)="logout()">LogOut</a>
+      </li>
+    </ul> -->
+  </nav>
+
+  <div class="navbar-second justify-content-center" *ngIf="tokenStorageService.isLoggedIn">
+    <div class="subnav" *ngFor="let path of paths">
+      <button type="button" [ngClass]="[activeBtn == path.parent ? 'active subnavbtn' : 'subnavbtn' ]"
+        (click)="show_subnav_content(path)">{{path.parent.parentName}} <i class="fa fa-caret-down"></i></button>
+      <div class="subnav-content" *ngIf="showCase">
+        <a href="javascript: void(0)" *ngFor="let subPath of showPath; let i = index" routerLink = "{{subPath.id}}" routerLinkActive="second-active">{{subPath.childName}}</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid">
+    <router-outlet></router-outlet>
+  </div>
+</div>

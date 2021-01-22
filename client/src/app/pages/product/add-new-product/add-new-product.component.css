@@ -1,0 +1,18 @@
+.main {
+    margin-top: 70px;
+}
+.nav-back {
+    background-color: lightgrey !important;
+    color: rgb(24, 19, 19) !important;
+    
+}
+.navbar-back {
+    background-color: whitesmoke !important;
+    box-shadow: 0 2px 8px #151515 !important;
+}
+.required{
+    color: red;
+}
+.nav-back:active {
+    background-color: red !important;
+}

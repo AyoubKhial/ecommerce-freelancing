@@ -1,0 +1,23 @@
+[
+    {"id": "1", "sequenceNo": "999", "firstName": "Electronic", "subName": "Computer", "showCase": "true"},
+    {"id": "1", "sequenceNo": "999", "firstName": "Electronic", "subName": "Handphone", "showCase": "true"},
+    {"id": "1", "sequenceNo": "999", "firstName": "Electronic", "subName": "Tv", "showCase": "true"},
+    {"id": "1", "sequenceNo": "999", "firstName": "Souvenir", "subName": "", "showCase": "true"},
+    {"id": "1", "sequenceNo": "999", "firstName": "Home Decoration", "subName": "", "showCase": "true"},
+    {"id": "1", "sequenceNo": "999", "firstName": "Baby Child", "subName": "Baby Product", "showCase": "true"},
+    {"id": "1", "sequenceNo": "999", "firstName": "Personal care", "subName": "Skin care", "showCase": "true"},
+    {"id": "1", "sequenceNo": "999", "firstName": "Personal care", "subName": "Baby care", "showCase": "true"},
+    {"id": "1", "sequenceNo": "999", "firstName": "Personal care", "subName": "Solar Products", "showCase": "true"},
+    {"id": "1", "sequenceNo": "999", "firstName": "Personal care", "subName": "Material & Woman's Health", "showCase": "true"},
+    {"id": "1", "sequenceNo": "999", "firstName": "Personal care", "subName": "Hair care", "showCase": "true"},
+    {"id": "1", "sequenceNo": "999", "firstName": "Personal care", "subName": "Oral & Dental Health", "showCase": "true"},
+    {"id": "1", "sequenceNo": "999", "firstName": "Shoe", "subName": "", "showCase": "true"},
+    {"id": "1", "sequenceNo": "999", "firstName": "Jewelry", "subName": "Ring", "showCase": "true"},
+    {"id": "1", "sequenceNo": "999", "firstName": "Jewelry", "subName": "Necklance", "showCase": "true"},
+    {"id": "1", "sequenceNo": "999", "firstName": "Jewelry", "subName": "Wristband", "showCase": "true"},
+    {"id": "1", "sequenceNo": "999", "firstName": "Hardware", "subName": "Computer", "showCase": "true"},
+    {"id": "1", "sequenceNo": "999", "firstName": "Food", "subName": "Computer", "showCase": "true"},
+    {"id": "1", "sequenceNo": "999", "firstName": "Combine", "subName": "Computer", "showCase": "true"}
+
+
+]

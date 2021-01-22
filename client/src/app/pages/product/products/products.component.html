@@ -1,0 +1,175 @@
+<div class="container-fluid">
+    <div class="row main">
+        <div class="col-lg-10 offset-1">
+
+            <div class="accordion" id="productsAccordion">
+                <div class="card">
+                    <div class="card-header" id="search">
+                        <h6 class="mb-0">
+                            <a class="nav-link" data-toggle="collapse" data-target="#collapseOne"
+                                href="javascript:void(0)"><i class="fa fa-sort"></i>&nbsp;&nbsp;Search</a>
+                        </h6>
+                    </div>
+                    <div id="collapseOne" class="collapse" aria-labelledby="search" data-parent="#productsAccordion">
+                        <div class="card-body">
+                            <form class="">
+                                <div class="row px-5 my-3">
+                                    <div class="col-2"><label class="control-label">Category:</label></div>
+                                    <div class="col-4"><select class="form-control">
+                                            <option>choose</option>
+                                        </select></div>
+                                    <div class="col-2"><label class="control-label">ID:</label></div>
+                                    <div class="col-4"><input type="text" class="form-control"></div>
+                                </div>
+                                <div class="row px-5 my-3">
+                                    <div class="col-2"><label class="control-label">Brand:</label></div>
+                                    <div class="col-4"><select class="form-control">
+                                            <option>choose</option>
+                                        </select></div>
+                                    <div class="col-2">
+                                        <label class="control-label">Stock Code:</label>
+                                    </div>
+                                    <div class="col-4"><input type="text" class="form-control"></div>
+                                </div>
+                                <div class="row px-5 my-3">
+                                    <div class="col-2"><label class="control-label">Name of the Product:</label></div>
+                                    <div class="col-4"><input type="text" class="form-control"></div>
+                                    <div class="col-2"><label class="control-label">Barcode Code:</label></div>
+                                    <div class="col-4"><input type="text" class="form-control"></div>
+                                </div>
+                                <div class="row px-5 my-3">
+                                    <div class="col-2"><label class="control-label">Price:</label></div>
+                                    <div class="col-4">
+                                        <div class="row">
+
+                                            <div class="col-4 mx-0 justify-content-center inline"><input type="text"
+                                                    class="form-control" /></div>
+
+                                            <div class="col-4 mx-0"><input type="text"
+                                                    class="form-control" />&nbsp;&nbsp;</div>
+
+                                            <div class="col-4">
+                                                <select class="form-control">
+                                                    <option value="usd">USD</option>
+                                                    <option value="euro">EURO</option>
+                                                    <option value="tl">TL</option>
+                                                    <option value="pound">POUND</option>
+                                                    <option value="gold">GOLD</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-2"><label class="control-label">Stock quality:</label></div>
+                                    <div class="col-4">
+                                        <div class="row">
+                                            <div class="col-8"><input type="text" class="form-control"></div>
+                                            <div class="col-4">
+                                                <select class="form-control">
+                                                    <option value="equal">=</option>
+                                                    <option value="greater">>=</option>
+                                                    <option value="lesser">
+                                                        <= </option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+
+                                </div>
+                                <div class="row px-5 my-3">
+                                    <div class="col-2"><label>By Product Feature:</label></div>
+                                    <div class="col-4">
+                                        <select class="form-control">
+                                            <option value="all">All</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-2"><label>Date of upload:</label></div>
+                                    <div class="col-4">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <input type="date" class="form-control">
+                                            </div>
+                                            <div class="col-6">
+                                                <input type="date" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row px-5 my-3">
+                                    <div class="col-2"><label>Countdown Date</label></div>
+                                    <div class="col-4">
+                                        <div class="row">
+                                            <div class="col-6"><input type="date" class="form-control"></div>
+                                            <div class="col-6"><input type="date" class="form-control"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-2"><label>Product Features:</label></div>
+                                    <div class="col-4">
+                                        <select class="form-control">
+                                            <option value="all">All</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row px-5 my-3">
+                                    <div class="col-12">
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-primary btn-sm">Search</button>
+                                            <button type="button" class="btn btn-success btn-sm">Category
+                                                Move</button>
+                                            <button type="button" class="btn btn-secondary btn-sm">Result
+                                                Export</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+
+                    <h6 class="mb-0"><a class="nav-link"><i class="fa fa-play-circle">&nbsp;&nbsp;</i>Products</a></h6>
+                </div>
+                <div class="card-body">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-secondary btn-sm">Refresh</button>
+                        <button type="button" class="btn btn-success btn-sm" (click)="gotoAddingProduct()">Add</button>
+                        <button type="button" class="btn btn-danger btn-sm">Delete</button>
+                    </div>
+                    <div class="input-group my-4 search">
+
+                        <input type="text" class="form-control" placeholder="Type to filter the name column..."
+                            (keyup)="updateFilter($event)" />
+                        <div class="input-group-append">
+                            <span class="input-group-text"><i class="fa fa-search"></i></span>
+                        </div>
+                    </div>
+                    <ngx-datatable #myTable class="material" [rows]="rows" [columnMode]="'force'" [headerHeight]="50"
+                        [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [sorts]="[{prop: 'name', dir: 'desc'}]"
+                        #myFilterTable>
+
+                        <ngx-datatable-column name="Company">
+                            <ng-template let-row="row" ngx-datatable-cell-template>
+                                {{row.company}}
+                            </ng-template>
+                        </ngx-datatable-column>
+
+                        <ngx-datatable-column name="Name">
+                            <ng-template let-row="row" ngx-datatable-cell-template>
+                                {{row.name}}
+                            </ng-template>
+                        </ngx-datatable-column>
+
+                        <ngx-datatable-column name="Gender">
+                        </ngx-datatable-column>
+
+                    </ngx-datatable>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

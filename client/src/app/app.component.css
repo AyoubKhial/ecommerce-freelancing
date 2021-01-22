@@ -1,0 +1,85 @@
+.navbar-second {
+    overflow: hidden;
+    background-color: #333;
+    padding-left: 8.4%;
+}
+
+/* Navigation links */
+.navbar-second a {
+    float: left;
+    font-size: 12px;
+    color: white;
+    text-align: center;
+    padding: 14px 20px;
+    text-decoration: none;
+}
+
+/* The subnavigation menu */
+.subnav {
+    float: left;
+    overflow: hidden;
+}
+
+/* Subnav button */
+.subnav .subnavbtn {
+    font-size: 12px;
+    border: none;
+    outline: none;
+    color: white;
+    padding: 14px 20px;
+    background-color: #333;
+    font-family: inherit;
+    margin: 0;
+}
+
+/* Add a red background color to navigation links on hover */
+.subnavbtn:hover {
+    background-color: red !important;
+}
+
+/* Style the subnav content - positioned absolute */
+.subnav-content {
+    position: absolute;
+    left: 0;
+    background-color: red;
+    width: 100%;
+    z-index: 1;
+    padding-left: 8.4%;
+}
+
+/* Style the subnav links */
+.subnav-content a {
+    float: left;
+    color: white;
+    text-decoration: none;
+}
+
+/* Add a grey background color on hover */
+.subnav-content a:hover {
+    background-color: #eee;
+    color: black;
+}
+.navbar-second .active {
+    background-color: red !important;
+}
+
+.main {
+    position: absolute;
+    top: 160px !important;
+}
+
+.navbar-background {
+    background-color: #333 !important;
+}
+
+.logo {
+    height: 55px;
+}
+
+.content-main {
+    padding-top: 200px;
+}
+
+.second-active {
+    background-color: rgb(183, 39, 39) !important ;
+}

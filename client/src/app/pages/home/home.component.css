@@ -1,0 +1,31 @@
+.main {
+    margin-top: 70px;
+}
+.nav-border {
+    /* border: 1px 0 0 1px solid grey !important; */
+    background-color: lightgrey;
+    
+}
+/* .nav-border:hover {
+    background-color: rgba(22, 21, 122, 0.562);
+} */
+
+.card-back{
+    background-color: lightgrey;
+}
+.card-back-one {
+    background-color: white;
+    height: 22vh;
+    width: 100%;
+    box-shadow: 0 0 3px #43237e;
+}
+.card-back-two {
+    background-color: white;
+    height: 15vh;
+    width: 100%;
+    box-shadow: 0 0 3px #28164b;
+}
+
+.card {
+    box-shadow: 0 1px 1px #151515;
+}

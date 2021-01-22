@@ -1,0 +1,331 @@
+<!-- <div class="container">
+    <header class="jumbotron">
+        <p>{{ content }}</p>
+    </header>
+</div> -->
+
+<div class="container-fluid">
+    <div class="row main">
+        <div class="offset-1 col-md-7">
+            <div class="card card-back">
+                <div class="card-header">
+                    <ul class="nav">
+                        <li class="nav-item mt-2 mx-2">
+                            <i class="fa fa-line-chart"></i>
+                        </li>
+                        <li class="nav-item mx-2">
+                            <a class="nav-link nav-border p-2" href="javascript:void(0)" routerLinkActive
+                                (click)="menu_daliy()">Daliy Statistic</a>
+                        </li>
+                        <li class="nav-item mx-2">
+                            <a class="nav-link  nav-border p-2" href="javascript:void(0)" routerLinkActive
+                                (click)="menu_session()">Session Statistic</a>
+                        </li>
+                        <li class="nav-item mx-2">
+                            <a class="nav-link nav-border p-2" href="javascript:void(0)" routerLinkActive
+                                (click)="menu_order()">Order Statistic</a>
+                        </li>
+                        <li class="nav-item mx-2">
+                            <a class="nav-link nav-border p-2" href="javascript:void(0)" routerLinkActive
+                                (click)="menu_member()">Member Statistic</a>
+                        </li>
+                        <li class="nav-item mx-2">
+                            <a class="nav-link nav-border p-2" href="javascript:void(0)" routerLinkActive
+                                (click)="menu_payment()">Payment Statistic</a>
+                        </li>
+                        <li class="nav-item ml-auto mx-2">
+                            <a class="nav-link p-2 "><i class="fa fa-question"></i></a>
+                        </li>
+                        <li class="nav-item mx-2">
+                            <a class="nav-link p-2"><i class="fa fa-film"></i></a>
+                        </li>
+                    </ul>
+
+
+                </div>
+
+                <div class="card-body">
+                    <div class="row" *ngIf="showdaliy">
+                        <div class="col-3">
+                            <div class="py-3 card-back-one mx-1">
+                                <p class="text-right mr-4"><a href="javascript:void(0)"><i
+                                            class="fa fa-question"></i></a></p>
+                                <h1 class="text-center mt-2"><a href="javascript: void(0)"><i class="fa fa-user-plus"></i></a>
+                                </h1>
+                                <h1 class="text-center card-text font-weight-normal my-3">0</h1>
+                                <h6 class="text-center card-text mb-1">NEW MEMBER</h6>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="py-3 card-back-one mx-1">
+                                <p class="text-right mr-4"><a href="javascript:void(0)"><i
+                                            class="fa fa-question"></i></a></p>
+                                <h1 class="text-center  mt-2"><a href="javascript: void(0)"><i class="fa fa-hourglass-2"></i></a>
+                                </h1>
+                                <h1 class="text-center card-text font-weight-normal my-3">0</h1>
+                                <h6 class="text-center card-text mb-1">ORDER Awaiting Approval</h6>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="py-3 card-back-one mx-1">
+                                <p class="text-right mr-4"><a href="javascript:void(0)"><i
+                                            class="fa fa-question"></i></a></p>
+                                <h1 class="text-center mt-2"><a href="javascript: void(0)"><i class="fa fa-cart-plus"></i></a>
+                                </h1>
+                                <h1 class="text-center card-text font-weight-normal my-3">0</h1>
+                                <h6 class="text-center card-text mb-1">TOTAL ORDER</h6>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="text-center py-3 card-back-one mx-1">
+                                <p class="text-right mr-4"><a href="javascript:void(0)"><i
+                                            class="fa fa-question"></i></a></p>
+                                <h1 class="text-center mt-2"><a href="javascript: void(0)"><i class="fa fa-money"></i></a></h1>
+                                <h1 class="text-center card-text font-weight-normal my-3">0.00</h1>
+                                <h6 class="text-center card-text mb-1">TOTAL AMOUNT OF SALES</h6>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row" *ngIf="showsession">
+                        <div class="mx-3 card-back-one">
+                            <div class="col-8 offset-2 text-center">
+                                <h6 class="card-text pt-4" style="line-height: 2;">IdeaSoft now provides visitor data in a
+                                    fully integrated manner
+                                    with Google Analytics. You can track your more detailed and important data from your
+                                    IdeaSoft panel, integrated with Analytics.</h6>
+                                <div class="mt-4">
+                                    <button type="button" class="btn btn-success">
+                                        <i class="fa fa-google fa-lg"> Sign in with Google</i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row" *ngIf="showorder">
+                        <div class="col-9">
+                            <div class="card-back-one p-4 mr-0">
+                                This is barchart of Order statistic
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="card-back-one p-2">
+                                <p class="badge badge-default">Total</p>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <h6 class="card-text small">Today:</h6>
+                                    </div>
+                                    <div class="col-6">
+                                        <h6 class="card-text small">$0.00</h6>
+                                    </div>
+                                </div>
+                                <hr class="mt-0">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <h6 class="card-text small">This:</h6>
+                                    </div>
+                                    <div class="col-6">
+                                        <h6 class="card-text small">2,260.93 TL</h6>
+                                    </div>
+                                </div>
+                                <hr class="mt-0">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <h6 class="card-text small">Week:</h6>
+                                    </div>
+                                    <div class="col-6">
+                                        <h6 class="card-text small">2,260.93 TL</h6>
+                                    </div>
+                                </div>
+                                <hr class="mt-0">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <h6 class="card-text small">Month:</h6>
+                                    </div>
+                                    <div class="col-6"></div>
+                                </div>
+                                <hr class="mt-0">
+                                <div class="row mt-0">
+                                    <div class="col-10 offset-1"><button type="button"
+                                            class="btn btn-block btn-primary p-1">Click All for Statistic</button></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row" *ngIf="showmember">
+                        <div class="col-9">
+                            <div class="card-back-one p-4 mr-0">
+                                this is chart of member.
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="card-back-one p-2">
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row" *ngIf="showpayment">
+                        <div class="col-9">
+                            <div class="card-back-one p-4 mr-0">
+                                this is chart of Payment.
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="card-back-one p-2">
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="card card-back">
+                <div class="card-header">
+                    <ul class="nav">
+                        <li class="nav-item mt-2 mx-2">
+                            <i class="fa fa-cogs"></i>
+                        </li>
+                        <li class="nav-item mx-2">
+                            <a class="nav-link nav-border p-2" href="javascript:void(0)" (click)="menu_click('general')"
+                                routerLinkActive>General Management</a>
+                        </li>
+                        <li class="nav-item mx-2">
+                            <a class="nav-link  nav-border p-2" href="javascript:void(0)"
+                                (click)="menu_click('product')" routerLinkActive>Product/Category Management</a>
+                        </li>
+                        <li class="nav-item mx-2">
+                            <a class="nav-link nav-border p-2" href="javascript:void(0)" (click)="menu_click('user')"
+                                routerLinkActive>User/Member/Dealer Management</a>
+                        </li>
+                        <li class="nav-item mx-2">
+                            <a class="nav-link nav-border p-2" href="javascript:void(0)" (click)="menu_click('setting')"
+                                routerLinkActive>Settings</a>
+                        </li>
+
+
+                    </ul>
+
+
+                </div>
+
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-2" *ngFor="let menu of submenus">
+                            <div class="text-center py-4 card-back-two">
+                                <h1 class="card-text mt-2"><a href="javascript: void(0)"><i class="{{menu.icon}}"></i></a></h1>
+
+                                <h6 class="card-text mt-3 small">{{menu.title}}</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card card-back">
+                <div class="card-header pb-1 bg-primary">
+                    <h6 class="card-title">Band & License Version Information</h6>
+                </div>
+                <div class="card-body pb-1">
+                    <div class="row mx-4 my-0">
+                        <h5 class="card-text small">Current Version</h5>
+                        <h5 class="card-text small ml-auto">11.0.5</h5>
+                    </div>
+                    <hr class="mt-0">
+                    <div class="row mx-4 my-1">
+                        <h5 class="card-text small">Domain</h5>
+                        <h5 class="card-text small ml-auto">demo.com</h5>
+                    </div>
+                    <hr class="mt-0">
+                    <div class="row mx-4 my-1">
+                        <h5 class="card-text small">Release Date</h5>
+                        <h5 class="card-text small ml-auto">1.8.2021</h5>
+                    </div>
+                    <hr class="mt-0">
+                    <div class="row mx-4 my-1">
+                        <h5 class="card-text small">License Code</h5>
+                        <h5 class="card-text small ml-auto">1052-0230-0208-250</h5>
+                    </div>
+                    <hr class="mt-0">
+                    <div class="row mx-4 my-1">
+                        <h5 class="card-text small">License Start Date</h5>
+                        <h5 class="card-text small ml-auto">1.8.2021</h5>
+                    </div>
+                    <hr class="mt-0">
+                    <div class="row mx-4 my-1">
+                        <h5 class="card-text small">License End Date</h5>
+                        <h5 class="card-text small ml-auto">1.8.2021</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="card card-back mt-1">
+                <div class="card-header pb-1 bg-primary">
+                    <h5 class="card-title">Exchange</h5>
+                </div>
+                <div class="card-body mx-4 pb-1">
+                    <div class="row my-0">
+                        <div class="col-4">
+                            <h5 class="card-text small font-weight-bold">Unit</h5>
+                        </div>
+                        <div class="col-4">
+                            <h5 class="card-text small font-weight-bold">Text1</h5>
+                        </div>
+                        <div class="col-4">
+                            <h5 class="card-text small font-weight-bold">Text2</h5>
+                        </div>
+                    </div>
+                    <hr class="mt-0">
+                    <div class="row my-1">
+                        <div class="col-4">
+                            <h5 class="card-text small">EURO</h5>
+                        </div>
+                        <div class="col-4">
+                            <h5 class="card-text small">8.9342 TL</h5>
+                        </div>
+                        <div class="col-4">
+                            <h5 class="card-text small">8.9503 TL</h5>
+                        </div>
+                    </div>
+                    <hr class="mt-0">
+                    <div class="row my-1">
+                        <div class="col-4">
+                            <h5 class="card-text small">POUND</h5>
+                        </div>
+                        <div class="col-4">
+                            <h5 class="card-text small">TRY 9.8641</h5>
+                        </div>
+                        <div class="col-4">
+                            <h5 class="card-text small">9.9156 TL</h5>
+                        </div>
+                    </div>
+                    <hr class="mt-0">
+                    <div class="row my-1">
+                        <div class="col-4">
+                            <h5 class="card-text small">USD</h5>
+                        </div>
+                        <div class="col-4">
+                            <h5 class="card-text small">7.2733 TRY</h5>
+                        </div>
+                        <div class="col-4">
+                            <h5 class="card-text small">7.2864 TRY</h5>
+                        </div>
+                    </div>
+                    <hr class="mt-0">
+                    <div class="row my-1">
+                        <div class="col-6">
+                            <h5 class="card-text small">Last Update <i class="fa fa-question"></i></h5>
+                            <h5 class="card-text small">08.01.2021 08: 40: 00</h5>
+                        </div>
+                        <div class="ml-auto">
+                            <button type="button" class="btn btn-primary">Update</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

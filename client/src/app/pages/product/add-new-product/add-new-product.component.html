@@ -1,0 +1,544 @@
+<div class="container-fluid">
+    <div class="row main">
+        <div class="col-lg-10 offset-1">
+            <div class="card">
+                <div class="card-header">
+                    <h6 class="card-title"><i class="fa fa-play-circle">&nbsp;&nbsp;</i>Add New Product</h6>
+                </div>
+                <div class="card-body">
+                    <nav class="navbar navbar-expand-sm navbar-back bg-light">
+                        <ul class="navbar-nav flex-nowrap">
+                            <li class="navbar-item" *ngFor="let productMenu of productMenus"><a
+                                    class="nav-link nav-back mx-1 small" href="javascript: void(0)"
+                                    (click)="gotoPage(productMenu.id)">{{productMenu.name}}</a></li>
+                        </ul>
+                    </nav>
+                    <div class="mt-5" *ngIf="currentMenu == 'newProduct'">
+                        <p class="h4 font-weight-bold">New Product</p>
+                        <hr>
+                        <form>
+                            <div class="row my-3">
+                                <div class="col-2 d-flex justify-content-between px-4 py-1"><label
+                                        for="category">Category</label><span>:</span></div>
+                                <div class="col-4">
+                                    <select class="form-control" id="category" name="category">
+                                        <option class="active">Choose</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row my-3">
+                                <div class="col-2 d-flex justify-content-between px-4 py-1"><label
+                                        for="brand">Brand</label><span>:</span></div>
+                                <div class="col-4">
+                                    <select class="form-control" id="brand" name="brand">
+                                        <option class="active">Choose</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row my-3">
+                                <div class="col-2 d-flex justify-content-between px-4 py-1"><label
+                                        for="productname">Name of the product</label><span>:</span></div>
+                                <div class="col-4">
+                                    <input type="text" class="form-control" id="productname" name="productname">
+                                </div><span class="required">*</span>
+                            </div>
+                            <div class="row my-3">
+                                <div class="col-2 d-flex justify-content-between px-4 py-1"><label
+                                        for="productname">Price</label><span>:</span></div>
+                                <div class="col-4">
+                                    <input type="text" class="form-control" id="price" name="price">
+                                </div><span class="required">*</span>
+                            </div>
+                            <div class="row my-3">
+                                <div class="col-2 d-flex justify-content-between px-4"><label>VAT
+                                        included</label><span>:</span></div>
+                                <div class="form-check col-3 ml-3">
+
+                                    <label class="form-check-label">
+                                        <input type="checkbox" class="form-check-input"
+                                            value="">&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-question"
+                                            title="This is a help"></i>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="row my-3">
+                                <div class="col-2 d-flex justify-content-between px-4 py-1"><label>VAT
+                                        included</label><span>:</span></div>
+                                <div class="col-2">
+                                    <select class="form-control">
+                                        <option value="usd">USD</option>
+                                        <option value="euro">EURO</option>
+                                        <option value="tl">TL</option>
+                                        <option value="pound">POUND</option>
+                                        <option value="gold">GOLD</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row my-3">
+                                <div class="col-2 d-flex justify-content-between px-4 py-1"><label>Stock
+                                        Code</label><span>:</span></div>
+                                <div class="col-4">
+                                    <input type="text" class="form-control" name="stockcode">
+                                </div>
+                            </div>
+                            <div class="row my-3">
+                                <div class="col-2 d-flex justify-content-between px-4 py-1"><label>Barcode
+                                        Code</label><span>:</span></div>
+                                <div class="col-4">
+                                    <input type="text" class="form-control" name="barcode">
+                                </div>
+                            </div>
+                            <div class="row my-3">
+                                <div class="col-2 d-flex justify-content-between px-4 py-1"><label>Stock
+                                        Quantity</label><span>:</span></div>
+                                <div class="col-4">
+                                    <div class="row">
+                                        <div class="col-6"><input type="text" class="form-control"></div>
+                                        <div class="col-6">
+                                            <select class="form-control">
+                                                <option value="piece">Piece</option>
+                                                <option value="centi">Cm</option>
+                                                <option value="dozen">Dozen</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row my-3">
+                                <div class="col-2 d-flex justify-content-betwen px-4 py-1"><label>Cargo
+                                        Weight</label><span>:</span></div>
+                                <div class="col-2">
+                                    <input type="number" class="form-control" name="cargo">
+                                </div><span>desi-kg</span>
+                            </div>
+                            <div class="row my-3">
+                                <div class="col-2 d-flex justify-content-between px-4 py-1">
+                                    <label>Condition</label><span>:</span>
+                                </div>
+                                <div class="col-2">
+                                    <select class="form-control">
+                                        <option value="active">Active</option>
+                                        <option value="passive">Passive</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row my-3">
+                                <div class="col-2"></div>
+                                <div class="col-4">
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-success btn-sm">Save</button>
+                                        <button type="button" class="btn btn-secondary btn-sm"
+                                            (click)="gotoPage('price')">Continue</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="mt-5" *ngIf="currentMenu == 'price'">
+                        <p class="h4 font-weight-bold">Price</p>
+                        <hr>
+                        <form>
+                            <div class="row my-3">
+                                <div class="col-2 d-flex justify-content-between px-4 py-1">
+                                    <label>Price 2</label><span>:</span>
+                                </div>
+                                <div class="col-2">
+                                    <input type="text" class="form-control" name="price2">
+                                </div>
+                            </div>
+                            <div class="row my-3">
+                                <div class="col-2 d-flex justify-content-between px-4 py-1">
+                                    <label>Price 3</label><span>:</span>
+                                </div>
+                                <div class="col-2">
+                                    <input type="text" class="form-control" name="price3">
+                                </div>
+                            </div>
+                            <div class="row my-3">
+                                <div class="col-2 d-flex justify-content-between px-4 py-1">
+                                    <label>Price 4</label><span>:</span>
+                                </div>
+                                <div class="col-2">
+                                    <input type="text" class="form-control" name="pric43">
+                                </div>
+                            </div>
+                            <div class="row my-3">
+                                <div class="col-2 d-flex justify-content-between px-4 py-1">
+                                    <label>Price 5</label><span>:</span>
+                                </div>
+                                <div class="col-2">
+                                    <input type="text" class="form-control" name="price5">
+                                </div>
+                            </div>
+                            <div class="row my-3">
+                                <div class="col-2 d-flex justify-content-between px-4 py-1">
+                                    <label>Purchase Price</label><span>:</span>
+                                </div>
+                                <div class="col-2">
+                                    <input type="text" class="form-control" name="purchase">
+                                </div>
+                            </div>
+                            <div class="row my-3">
+                                <div class="col-2 d-flex justify-content-between px-4 py-1">
+                                    <label>VAT</label><span>:</span>
+                                </div>
+                                <div class="col-2">
+                                    <input type="text" class="form-control" name="vat">
+                                </div><span>%</span>
+                            </div>
+                            <div class="row my-3">
+                                <div class="col-2 d-flex justify-content-between px-4 py-1">
+                                    <label>Market Price</label><span>:</span>
+                                </div>
+                                <div class="col-2">
+                                    <input type="text" class="form-control" name="market">
+                                </div>
+                            </div>
+                            <div class="row my-3">
+                                <div class="col-2 d-flex justify-content-between px-4 py-1">
+                                    <label>Discount Type</label><span>:</span>
+                                </div>
+                                <div class="col-2">
+                                    <select class="form-control" name="discountType">
+                                        <option value="percentage">Percentage Discount</option>
+                                        <option valuse="Discounted Price"></option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row my-3">
+                                <div class="col-2 d-flex justify-content-between px-4 py-1">
+                                    <label>Discount</label><span>:</span>
+                                </div>
+                                <div class="col-2">
+                                    <input type="text" class="form-control" name="discount">
+                                </div><span class="required small">* The reduced price is only valid for 'Price 1'. The
+                                    discounted price value cannot be negative.
+                                </span>
+                            </div>
+                            <div class="row my-3">
+                                <div class="col-2 d-flex justify-content-between px-4 py-1">
+                                    <label>Transfer</label><span>:</span>
+                                </div>
+                                <div class="col-2">
+                                    <input type="text" class="form-control" name="transfre">
+                                </div>% <span class="required small">* Remittance discount percentage must be between
+                                    0-100
+                                </span>
+                            </div>
+                            <div class="row my-3">
+                                <div class="col-2 d-flex justify-content-between px-4 py-1">
+                                    <label>Shipping Cost</label><span>:</span>
+                                </div>
+                                <div class="form-check col-1 ml-3 mr-0">
+
+                                    <label class="form-check-label">
+                                        <input type="checkbox" class="form-check-input"
+                                            value="">&nbsp;&nbsp;<span>System</span>
+                                    </label>
+
+                                </div>
+                                <div class="col-1 mx-0">
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="row my-3">
+                                <div class="col-2"></div>
+                                <div class="col-2">
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-secondary btn-sm"
+                                            (click)="gotoPage('newProduct')">Back</button>
+                                        <button type="button" class="btn btn-success btn-sm">Save</button>
+                                        <button type="button" class="btn btn-secondary btn-sm"
+                                            (click)="gotoPage('productDetail')">Continue</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="mt-5" *ngIf="currentMenu == 'productDetail'">
+                        <p class="h4 font-weight-bold">Product Detail</p>
+                        <hr>
+                        <form>
+                            <div class="row my-3">
+                                <div class="col-2 d-flex justify-content-between px-4 py-1">
+                                    <label>Product Feature</label><span>:</span>
+                                </div>
+                                <div class="col-4">
+                                    <select class="form-control" name="productFeature">
+                                        <option>Choose</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row my-3">
+                                <div class="col-2 d-flex justify-content-between px-4 py-1">
+                                    <label>More Information</label><span>:</span>
+                                </div>
+                                <div class="col-6">
+                                    <div class="NgxEditor__Wrapper">
+                                        <ngx-editor-menu [editor]="editorInfor" [toolbar]="toolbar"> </ngx-editor-menu>
+                                        <ngx-editor [editor]="editorInfor" [ngModel]="htmlInfor" [editable]="true"></ngx-editor>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row my-3">
+                                <div class="col-2 d-flex justify-content-between px-4 py-1">
+                                    <label>Detailed Information(Extra)</label><span>:</span>
+                                </div>
+                                <div class="col-6">
+                                    <div class="NgxEditor__Wrapper">
+                                        <ngx-editor-menu [editor]="editorDetailInfor" [toolbar]="toolbar"> </ngx-editor-menu>
+                                        <ngx-editor [editor]="editorDetailInfor" [ngModel]="htmlDetailInfor" [editable]="true"></ngx-editor>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row my-3">
+                                <div class="col-2 d-flex justify-content-between px-4 py-1">
+                                    <label>Private Information Area</label><span>:</span>
+                                </div>
+                                <div class="form-check col-1 ml-3 mr-0">
+
+                                    <label class="form-check-label">
+                                        <input type="checkbox" class="form-check-input"
+                                            value="">&nbsp;&nbsp;<span class="fa fa-question" title="The information added to this filed will be lacated in a tab such as Product Information, Reviews..."></span>
+                                    </label>
+                                    
+                                </div>
+                            </div>
+                            <div class="row my-3">
+                                <div class="col-2 d-flex justify-content-between px-4 py-1">
+                                    <label>Hood</label><span>:</span>
+                                </div>
+                                <div class="col-4">
+                                    <input type="text" class="form-control" name="food">
+                                </div>
+                            </div>
+                            <div class="row my-3">
+                                <div class="col-2 d-flex justify-content-between px-4 py-1">
+                                    <label>Content</label><span>:</span>
+                                </div>
+                                <div class="col-6">
+                                    <div class="NgxEditor__Wrapper">
+                                        <ngx-editor-menu [editor]="editorContent" [toolbar]="toolbar"> </ngx-editor-menu>
+                                        <ngx-editor [editor]="editorContent" [ngModel]="htmlContent" [editable]="true"></ngx-editor>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row my-3">
+                                <div class="col-2 d-flex justify-content-between px-4 py-1">
+                                    <label>Short Description</label><span>:</span>
+                                </div>
+                                <div class="col-4">
+                                    <textarea class="form-control" name="shortDescription" rows="3"></textarea>
+                                </div>
+                            </div>
+                            <div class="row my-3">
+                                <div class="col-2 d-flex justify-content-between px-4 py-1">
+                                    <label>Site Search Tags</label><span>:</span>
+                                </div>
+                                <div class="col-4">
+                                    <textarea class="form-control" name="siteSearch" rows="3"></textarea>
+                                </div>
+                            </div>
+                            <div class="row my-3">
+                                <div class="col-2"></div>
+                                <div class="col-4">
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-secondary btn-sm" (click) = "gotoPage('price')">Back</button>
+                                        <button type="button" class="btn btn-success btn-sm">Save</button>
+                                        <button type="button" class="btn btn-secondary btn-sm" (click) = "gotoPage('other')">Continue</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="mt-5" *ngIf="currentMenu == 'other'">
+                        <p class="h4 font-weight-bold">Other</p>
+                        <hr>
+                        <form>
+                            <div class="row my-3">
+                                <div class="col-2 d-flex justify-content-between px-4 py-1">
+                                    <label>Warranty Period</label><span>:</span>
+                                </div>
+                                <div class="col-3">
+                                    <input type="text" class="form-control" name="warranty">
+                                </div>
+                            </div>
+                            <div class="row my-3">
+                                <div class="col-2 d-flex justify-content-between px-4 py-1">
+                                    <label>Gifted</label><span>:</span>
+                                </div>
+                                <div class="col-3 d-flex justify-content-between">
+                                    <input type="checkbox" class="form-check-input" name="giftcheck">
+                                    <input type="text" class="form-control" name="gift">
+                                </div><span class="fa fa-question"></span>
+                            </div>
+                            <div class="row my-3">
+                                <div class="col-2 d-flex justify-content-between px-4 py-1">
+                                    <label>Using N11 Integration</label><span>:</span>
+                                </div>
+                                <div class="col-2">
+                                    <div class="form-check-inline">
+                                        <label class="form-check-label">
+                                            <input type="radio" class="form-check-input" name="n11">Yes
+                                        </label>
+                                    </div>
+                                    <div class="form-check-inline">
+                                        <label class="form-check-label">
+                                            <input type="radio" class="form-check-input" name="n11" checked>No
+                                        </label>
+                                    </div><span class="fa fa-question"></span>
+                                </div>
+                            </div>
+                            <div class="row my-3">
+                                <div class="col-2 d-flex justify-content-between px-4 py-1">
+                                    <label>Using GG Integration</label><span>:</span>
+                                </div>
+                                <div class="col-2">
+                                    <div class="form-check-inline">
+                                        <label class="form-check-label">
+                                            <input type="radio" class="form-check-input" name="gg">Yes
+                                        </label>
+                                    </div>
+                                    <div class="form-check-inline">
+                                        <label class="form-check-label">
+                                            <input type="radio" class="form-check-input" name="ngg" checked>No
+                                        </label>
+                                    </div><span class="fa fa-question"></span>
+                                </div>
+                            </div>
+                            <div class="row my-3">
+                                <div class="col-2 d-flex justify-content-between px-4 py-1">
+                                    <label>Using HB Integration</label><span>:</span>
+                                </div>
+                                <div class="col-2">
+                                    <div class="form-check-inline">
+                                        <label class="form-check-label">
+                                            <input type="radio" class="form-check-input" name="hb">Yes
+                                        </label>
+                                    </div>
+                                    <div class="form-check-inline">
+                                        <label class="form-check-label">
+                                            <input type="radio" class="form-check-input" name="hb" checked>No
+                                        </label>
+                                    </div><span class="fa fa-question"></span>
+                                </div>
+                            </div>
+                            <div class="row my-3">
+                                <div class="col-2 d-flex justify-content-between px-4 py-1">
+                                    <label>Using Amazon Integration</label><span>:</span>
+                                </div>
+                                <div class="col-2">
+                                    <div class="form-check-inline">
+                                        <label class="form-check-label">
+                                            <input type="radio" class="form-check-input" name="amazon">Yes
+                                        </label>
+                                    </div>
+                                    <div class="form-check-inline">
+                                        <label class="form-check-label">
+                                            <input type="radio" class="form-check-input" name="amaon" checked>No
+                                        </label>
+                                    </div><span class="fa fa-question"></span>
+                                </div>
+                            </div>
+                            <div class="row my-3">
+                                <div class="col-2 d-flex justify-content-between px-4 py-1">
+                                    <label>Picture 1</label><span>:</span>
+                                </div>
+                                <div class="col-4">
+                                    <input type="file" class="form-control-file border" name="picture1">
+                                </div>
+                            </div>
+                            <div class="row my-3">
+                                <div class="col-2 d-flex justify-content-between px-4 py-1">
+                                    <label>Picture 2</label><span>:</span>
+                                </div>
+                                <div class="col-4">
+                                    <input type="file" class="form-control-file border" name="picture2">
+                                </div>
+                            </div>
+                            <div class="row my-3">
+                                <div class="col-2 d-flex justify-content-between px-4 py-1">
+                                    <label>Picture 3</label><span>:</span>
+                                </div>
+                                <div class="col-4">
+                                    <input type="file" class="form-control-file border" name="picture3">
+                                </div>
+                            </div>
+                            <div class="row my-3">
+                                <div class="col-2 d-flex justify-content-between px-4 py-1">
+                                    <label>Picture 4</label><span>:</span>
+                                </div>
+                                <div class="col-4">
+                                    <input type="file" class="form-control-file border" name="picture4">
+                                </div>
+                            </div>
+                            <div class="row my-3">
+                                <div class="col-2 d-flex justify-content-between px-4 py-1">
+                                    <label>Picture 5</label><span>:</span>
+                                </div>
+                                <div class="col-4">
+                                    <input type="file" class="form-control-file border" name="picture5">
+                                </div>
+                            </div>
+                            <div class="row my-3">
+                                <div class="col-2 d-flex justify-content-between px-4 py-1">
+                                    <label>Picture 6</label><span>:</span>
+                                </div>
+                                <div class="col-4">
+                                    <input type="file" class="form-control-file border" name="picture6">
+                                </div>
+                            </div>
+                            <div class="row my-3">
+                                <div class="col-2 d-flex justify-content-between px-4 py-1">
+                                    <label>Picture 7</label><span>:</span>
+                                </div>
+                                <div class="col-4">
+                                    <input type="file" class="form-control-file border" name="picture7">
+                                </div>
+                            </div>
+                            <div class="row my-3">
+                                <div class="col-2 d-flex justify-content-between px-4 py-1">
+                                    <label>Picture 8</label><span>:</span>
+                                </div>
+                                <div class="col-4">
+                                    <input type="file" class="form-control-file border" name="picture8">
+                                </div>
+                            </div>
+                            <div class="row my-3">
+                                <div class="col-2 d-flex justify-content-between px-4 py-1">
+                                    <label>Recommanded Product</label><span>:</span>
+                                </div>
+                                <div class="col-4">
+                                    <input type="text" class="form-control" name="recommand">
+                                </div>
+                                <span class="small"><i class="fa fa-plus"></i>&nbsp;&nbsp;(Write the IDs of products you want, separated by commas)</span>
+                            </div>
+                            <div class="row my-3">
+                                <div class="col-2 d-flex justify-content-between px-4 py-1">
+                                    <label>Combined Product</label><span>:</span>
+                                </div>
+                                <div class="col-4">
+                                    <input type="text" class="form-control" name="combine">
+                                </div>
+                                <span class="small"><i class="fa fa-plus"></i>&nbsp;&nbsp;(Write the IDs of products you want, separated by commas)</span>
+                            </div>
+                            <div class="row my-3">
+                                <div class="col-2"></div>
+                                <div class="col-4">
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-secondary btn-sm" (click) = "gotoPage('productDetail')">Back</button>
+                                        <button type="button" class="btn btn-success btn-sm">Save</button>
+                                        <button type="button" class="btn btn-secondary btn-sm" (click)="gotoPage('variants')">Continue</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
