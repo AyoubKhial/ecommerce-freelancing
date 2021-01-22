@@ -1,12 +1,15 @@
-const mysql = require("mysql2");
+const Sequelize = require("sequelize");
 const config = require('./config/database');
 
-// Create a connection to the database
-const connection = mysql.createConnection({
+const sequelize = new Sequelize(config.name, config.user, config.password, {
     host: config.host,
-    user: config.user,
-    password: config.password,
-    database: config.name,
+    dialect: config.dialect,
+    operatorsAliases: false
 });
 
-module.exports = connection;
+const db = {};
+
+db.Sequelize = Sequelize;
+db.sequelize = sequelize;
+
+module.exports = db;
