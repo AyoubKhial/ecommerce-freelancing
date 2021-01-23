@@ -4,7 +4,7 @@ const Brand = database.brands;
 
 const create = async (req, res) => {
     const data = JSON.parse(req.body.data);
-    data.logo = req.file.filename;
+    if (req.file) data.logo = req.file.filename;
     const brand = await Brand.create(data);
     res.status(201).send(brand);
 };
