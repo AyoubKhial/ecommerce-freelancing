@@ -1,6 +1,7 @@
 const bodyParser = require("body-parser");
 const cors = require('cors');
 const express = require("express");
+const fs = require('fs');
 const path = require('path');
 const connection = require('./database');
 
@@ -21,5 +22,8 @@ const PORT = process.env.PORT || 3000;
 categoryRoutes(app);
 brandRoutes(app);
 connection.sequelize.sync();
+
+if (!fs.existsSync('./public'))fs.mkdirSync('./public');
+if (!fs.existsSync('./public/images'))fs.mkdirSync('./public/images');
 
 app.listen(PORT , () => console.log(`Server started, listening port: ${PORT}`));
