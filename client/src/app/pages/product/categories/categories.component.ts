@@ -49,7 +49,6 @@ export class CategoriesComponent implements OnInit {
 	}
 
 	public add = (): void => {
-		console.log(this.category);
 		this.createCategory(this.category);
 	}
 
