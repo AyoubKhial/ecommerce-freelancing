@@ -88,6 +88,7 @@ import { ReportsComponent } from './pages/statistics/reports/reports.component';
 import { IntegrationsComponent } from './pages/integrations/integrations/integrations.component';
 import { IdeaOutputComponent } from './pages/integrations/idea-output/idea-output.component';
 import { MarketplaceComponent } from './pages/integrations/marketplace/marketplace.component';
+import { VariantsComponent } from './pages/product/variants/variants.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -104,6 +105,7 @@ const routes: Routes = [
   { path: 'addingProduct', component: AddNewProductComponent},
   { path: 'filterManagement', component: FilterManagementComponent},
   { path: 'categories', component: CategoriesComponent},
+  { path: 'variants', component: VariantsComponent},
   { path: 'brands', component: BrandsComponent},
   { path: 'additionalInformation', component: AdditionalInformationComponent},
   { path: 'additionalFeature', component: AdditionalFeaturesComponent},

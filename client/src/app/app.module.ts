@@ -97,6 +97,7 @@ import { IntegrationsComponent } from './pages/integrations/integrations/integra
 import { IdeaOutputComponent } from './pages/integrations/idea-output/idea-output.component';
 import { MarketplaceComponent } from './pages/integrations/marketplace/marketplace.component';
 import { ImageFormatterComponent } from './_helpers/Image-formatter.component';
+import { VariantsComponent } from './pages/product/variants/variants.component';
 
 @NgModule({
   declarations: [
@@ -185,7 +186,8 @@ import { ImageFormatterComponent } from './_helpers/Image-formatter.component';
     IntegrationsComponent,
     IdeaOutputComponent,
     MarketplaceComponent,
-    ImageFormatterComponent
+    ImageFormatterComponent,
+    VariantsComponent
   ],
   imports: [
     BrowserModule,
