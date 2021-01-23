@@ -8,6 +8,8 @@ const connection = require('./database');
 // routes
 const categoryRoutes = require('./app/category/routes');
 const brandRoutes = require('./app/brand/routes');
+const variantRoutes = require('./app/variant/routes');
+const featureRoutes = require('./app/feature/routes');
 
 const app = express();
 
@@ -21,6 +23,8 @@ const PORT = process.env.PORT || 3000;
 
 categoryRoutes(app);
 brandRoutes(app);
+variantRoutes(app);
+featureRoutes(app);
 connection.sequelize.sync();
 
 if (!fs.existsSync('./public'))fs.mkdirSync('./public');
