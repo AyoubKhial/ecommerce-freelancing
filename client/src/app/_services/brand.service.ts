@@ -25,19 +25,11 @@ export class BrandService {
 
     constructor(private http: HttpClient) { }
 
-    create(brand: Partial<IBrand>, file: File): Observable<any> {
+    create(brand: Partial<IBrand>, file: File): Observable<IBrand> {
         const formData = new FormData();
         formData.append('file', file);
         formData.append('data', JSON.stringify(brand));
-        const header = new HttpHeaders();
-        const params = new HttpParams();
-        const options = {
-            params,
-            reportProgress: true,
-            headers: header
-        };
-        const req = new HttpRequest('POST', API_URL, formData, options);
-        return this.http.request(req);
+        return this.http.post<IBrand>(API_URL, formData);
     }
 
     find(): Observable<IBrand[]> {
