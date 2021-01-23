@@ -96,6 +96,7 @@ import { ReportsComponent } from './pages/statistics/reports/reports.component';
 import { IntegrationsComponent } from './pages/integrations/integrations/integrations.component';
 import { IdeaOutputComponent } from './pages/integrations/idea-output/idea-output.component';
 import { MarketplaceComponent } from './pages/integrations/marketplace/marketplace.component';
+import { ImageFormatterComponent } from './_helpers/Image-formatter.component';
 
 @NgModule({
   declarations: [
@@ -183,7 +184,8 @@ import { MarketplaceComponent } from './pages/integrations/marketplace/marketpla
     ReportsComponent,
     IntegrationsComponent,
     IdeaOutputComponent,
-    MarketplaceComponent
+    MarketplaceComponent,
+    ImageFormatterComponent
   ],
   imports: [
     BrowserModule,
@@ -192,7 +194,7 @@ import { MarketplaceComponent } from './pages/integrations/marketplace/marketpla
     HttpClientModule,
     NgxDatatableModule,
     NgxEditorModule,
-    AgGridModule.withComponents(null)
+    AgGridModule.withComponents([ImageFormatterComponent])
     
   ],
   providers: [authInterceptorProviders],
