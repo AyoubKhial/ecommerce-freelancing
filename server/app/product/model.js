@@ -32,6 +32,9 @@ module.exports = (sequelize, Sequelize) => {
         stockQuantity: {
             type: Sequelize.INTEGER,
         },
+        quantityUnit: {
+            type: Sequelize.INTEGER,
+        },
         cargoWeight: {
             type: Sequelize.FLOAT,
         },
@@ -61,6 +64,9 @@ module.exports = (sequelize, Sequelize) => {
         },
         discountType: {
             type: Sequelize.ENUM("PERCENTAGE", "PRICE"),
+        },
+        discount: {
+            type: Sequelize.FLOAT
         },
         transfer: {
             type: Sequelize.FLOAT,

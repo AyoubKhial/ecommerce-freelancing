@@ -4,7 +4,8 @@ const Product = database.products;
 const Op = database.Sequelize.Op;
 
 const create = async (req, res) => {
-    const product = await Product.create(req.body);
+    console.log(req.body);
+    // const product = await Product.create(req.body);
     res.status(201).send(product);
 };
 
