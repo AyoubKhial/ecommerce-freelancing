@@ -32,14 +32,13 @@ export class VariantsComponent implements OnInit {
 	constructor(private variantService: VariantService) {}
 
 	ngOnInit(): void {
-		this.getCategories();
+		this.getVariants();
 	}
 
 	public onCellValueChanged = (event: any): void => {
-		console.log(event);
 		const id = event.data.id;
 		const data = { [event.colDef.field]: event.newValue };
-		this.updateCategory(id, data);
+		this.updateVariant(id, data);
 	}
 
 	public onSelectionChanged = (event: any): void => {
@@ -47,33 +46,33 @@ export class VariantsComponent implements OnInit {
 	}
 
 	public add = (): void => {
-		this.createCategory(this.variant);
+		this.createVariant(this.variant);
 	}
 
 	public remove = (): void => {
 		if (this.selectedRows && confirm('Are you sure you want to delete the data selected ?')) {
 			const ids = this.selectedRows.map(row => row.id);
-			for (const id of ids) this.deleteCategory(id);
-			this.variants = this.variants.filter(category => !ids.includes(category.id));
+			for (const id of ids) this.deleteVariant(id);
+			this.variants = this.variants.filter(variant => !ids.includes(variant.id));
 			this.selectedRows = [];
 		}
 	}
 
-	private getCategories = (): void => {
+	private getVariants = (): void => {
 		this.variantService.find().subscribe(variants => {
 			this.variants = variants;
 		});
 	}
 
-	private updateCategory = (id: number, data: Partial<IVariant>): void => {
+	private updateVariant = (id: number, data: Partial<IVariant>): void => {
 		this.variantService.update(id, data).subscribe();
 	}
 
-	private deleteCategory = (id: number): void => {
+	private deleteVariant = (id: number): void => {
 		this.variantService.delete(id).subscribe();
 	}
 
-	private createCategory = (variant: Partial<IVariant>): void => {
+	private createVariant = (variant: Partial<IVariant>): void => {
 		this.variantService.create(variant).subscribe(variant => {
 			this.variants = [...this.variants, variant];
 		});
