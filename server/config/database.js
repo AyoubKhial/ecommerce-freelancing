@@ -1,7 +1,7 @@
 module.exports = {
     host: 'localhost',
     user: 'root',
-    password: '47CEA0532D@@@',
+    password: '',
     name: 'ecommerce1',
     dialect: 'mysql'
 };

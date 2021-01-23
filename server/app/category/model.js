@@ -2,21 +2,22 @@ module.exports = (sequelize, Sequelize) => {
     const Category = sequelize.define("category", {
         name: {
             type: Sequelize.STRING,
+            allowNull: false
         },
         url: {
-            type: Sequelize.STRING,
+            type: Sequelize.STRING
         },
         sequenceNumber: {
-            type: Sequelize.INTEGER,
+            type: Sequelize.INTEGER
         },
         priceRatio: {
-            type: Sequelize.INTEGER,
+            type: Sequelize.INTEGER
         },
         isCombine: {
-            type: Sequelize.BOOLEAN,
+            type: Sequelize.BOOLEAN
         },
         label: {
-            type: Sequelize.STRING,
+            type: Sequelize.STRING
         },
         keywords: {
             type: Sequelize.STRING,
@@ -29,7 +30,7 @@ module.exports = (sequelize, Sequelize) => {
             }
         },
         explanation: {
-            type: Sequelize.TEXT,
+            type: Sequelize.TEXT
         }
     });
 

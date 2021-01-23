@@ -2,9 +2,11 @@ module.exports = (sequelize, Sequelize) => {
     const Variant = sequelize.define("variant", {
         name: {
             type: Sequelize.STRING,
+            allowNull: false
         },
         values: {
-            type: Sequelize.STRING,
+            type: Sequelize.TEXT,
+            allowNull: false,
             get() {
                 return this.getDataValue('values')?.split(',')
             },

@@ -1,7 +1,6 @@
 const database = require('../../database');
 
 const Variant = database.variants;
-const Op = database.Sequelize.Op;
 
 const create = async (req, res) => {
     const variant = await Variant.create(req.body);

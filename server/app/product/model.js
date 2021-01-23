@@ -2,143 +2,169 @@ module.exports = (sequelize, Sequelize) => {
     const Product = sequelize.define("product", {
         category: {
             type: Sequelize.INTEGER,
+            allowNull: false,
             references: {
                 model: "categories",
-                key: "id",
-            },
+                key: "id"
+            }
         },
         brand: {
             type: Sequelize.INTEGER,
             references: {
                 model: "brands",
-                key: "id",
-            },
+                key: "id"
+            }
+        },
+        name: {
+            type: Sequelize.STRING,
+            allowNull: false
         },
         price: {
             type: Sequelize.FLOAT,
+            allowNull: false
         },
         vtaIncluded: {
-            type: Sequelize.BOOLEAN,
+            type: Sequelize.BOOLEAN
         },
         vtaUnit: {
-            type: Sequelize.INTEGER,
+            type: Sequelize.INTEGER
         },
         stockCode: {
-            type: Sequelize.STRING,
+            type: Sequelize.STRING
         },
         barCode: {
-            type: Sequelize.BOOLEAN,
+            type: Sequelize.BOOLEAN
         },
         stockQuantity: {
-            type: Sequelize.INTEGER,
+            type: Sequelize.INTEGER
         },
         quantityUnit: {
-            type: Sequelize.INTEGER,
+            type: Sequelize.INTEGER
         },
         cargoWeight: {
-            type: Sequelize.FLOAT,
+            type: Sequelize.FLOAT
         },
         condition: {
-            type: Sequelize.ENUM("ACTIVE", "PASSIVE"),
+            type: Sequelize.STRING
         },
         price2: {
-            type: Sequelize.FLOAT,
+            type: Sequelize.FLOAT
         },
         price3: {
-            type: Sequelize.FLOAT,
+            type: Sequelize.FLOAT
         },
         price4: {
-            type: Sequelize.FLOAT,
+            type: Sequelize.FLOAT
         },
         price5: {
-            type: Sequelize.FLOAT,
+            type: Sequelize.FLOAT
         },
         purchasePrice: {
-            type: Sequelize.FLOAT,
+            type: Sequelize.FLOAT
         },
         VAT: {
-            type: Sequelize.FLOAT,
+            type: Sequelize.FLOAT
         },
         marketPrice: {
-            type: Sequelize.FLOAT,
+            type: Sequelize.FLOAT
         },
         discountType: {
-            type: Sequelize.ENUM("PERCENTAGE", "PRICE"),
+            type: Sequelize.STRING
         },
         discount: {
             type: Sequelize.FLOAT
         },
         transfer: {
-            type: Sequelize.FLOAT,
+            type: Sequelize.FLOAT
         },
         shippingCost: {
-            type: Sequelize.FLOAT,
+            type: Sequelize.FLOAT
         },
         productFeature: {
-            type: Sequelize.STRING,
+            type: Sequelize.STRING
         },
         moreInformation: {
-            type: Sequelize.TEXT,
+            type: Sequelize.TEXT
         },
         detailedInformation: {
-            type: Sequelize.TEXT,
+            type: Sequelize.TEXT
         },
         privateInformationArea: {
-            type: Sequelize.FLOAT,
+            type: Sequelize.FLOAT
         },
         hood: {
-            type: Sequelize.STRING,
+            type: Sequelize.STRING
         },
         content: {
-            type: Sequelize.TEXT,
+            type: Sequelize.TEXT
         },
         shortDescription: {
-            type: Sequelize.TEXT,
+            type: Sequelize.TEXT
         },
         SiteSearchTags: {
-            type: Sequelize.TEXT,
+            type: Sequelize.TEXT
         },
         warrantyPeriod: {
-            type: Sequelize.STRING,
+            type: Sequelize.STRING
         },
         gifted: {
-            type: Sequelize.STRING,
+            type: Sequelize.STRING
         },
         usingN11Integration: {
-            type: Sequelize.BOOLEAN,
+            type: Sequelize.BOOLEAN
         },
         usingGGIntegration: {
-            type: Sequelize.BOOLEAN,
+            type: Sequelize.BOOLEAN
         },
         usingHBIntegration: {
-            type: Sequelize.BOOLEAN,
+            type: Sequelize.BOOLEAN
         },
         usingAmazonIntegration: {
-            type: Sequelize.BOOLEAN,
+            type: Sequelize.BOOLEAN
         },
         picture1: {
-            type: Sequelize.STRING,
+            type: Sequelize.STRING
         },
         picture2: {
-            type: Sequelize.STRING,
+            type: Sequelize.STRING
         },
         picture3: {
-            type: Sequelize.STRING,
+            type: Sequelize.STRING
         },
         picture4: {
-            type: Sequelize.STRING,
+            type: Sequelize.STRING
         },
         picture5: {
-            type: Sequelize.STRING,
+            type: Sequelize.STRING
         },
         picture6: {
-            type: Sequelize.STRING,
+            type: Sequelize.STRING
         },
         picture7: {
-            type: Sequelize.STRING,
+            type: Sequelize.STRING
         },
         picture8: {
+            type: Sequelize.STRING
+        },
+        recommendedProducts: {
             type: Sequelize.STRING,
+            get() {
+                return this.getDataValue("recommendedProducts")?.split(",");
+            },
+            set(val) {
+                if (Array.isArray(val)) this.setDataValue("recommendedProducts", val.join(","));
+                else this.setDataValue("recommendedProducts", val);
+            }
+        },
+        combinedProducts: {
+            type: Sequelize.STRING,
+            get() {
+                return this.getDataValue("combinedProducts")?.split(",");
+            },
+            set(val) {
+                if (Array.isArray(val)) this.setDataValue("combinedProducts", val.join(","));
+                else this.setDataValue("combinedProducts", val);
+            }
         },
         productPageTitle: {
             type: Sequelize.STRING
@@ -151,7 +177,7 @@ module.exports = (sequelize, Sequelize) => {
             set(val) {
                 if (Array.isArray(val)) this.setDataValue("keywords", val.join(","));
                 else this.setDataValue("keywords", val);
-            },
+            }
         },
         explanation: {
             type: Sequelize.TEXT
@@ -164,7 +190,7 @@ module.exports = (sequelize, Sequelize) => {
             set(val) {
                 if (Array.isArray(val)) this.setDataValue("seoTagging", val.join(","));
                 else this.setDataValue("seoTagging", val);
-            },
+            }
         },
         countdownFeature: {
             type: Sequelize.BOOLEAN
@@ -188,26 +214,7 @@ module.exports = (sequelize, Sequelize) => {
                 else this.setDataValue("customize", val);
             }
         },
-        recommendedProducts: {
-            type: Sequelize.STRING,
-            get() {
-                return this.getDataValue("recommendedProducts")?.split(",");
-            },
-            set(val) {
-                if (Array.isArray(val)) this.setDataValue("recommendedProducts", val.join(","));
-                else this.setDataValue("recommendedProducts", val);
-            },
-        },
-        combinedProducts: {
-            type: Sequelize.STRING,
-            get() {
-                return this.getDataValue("combinedProducts")?.split(",");
-            },
-            set(val) {
-                if (Array.isArray(val)) this.setDataValue("combinedProducts", val.join(","));
-                else this.setDataValue("combinedProducts", val);
-            },
-        },
+        
     });
     return Product;
 };

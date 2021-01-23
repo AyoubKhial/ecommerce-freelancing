@@ -2,18 +2,19 @@ module.exports = (sequelize, Sequelize) => {
     const Brand = sequelize.define("brand", {
         name: {
             type: Sequelize.STRING,
+            allowNull: false
         },
         url: {
-            type: Sequelize.STRING,
+            type: Sequelize.STRING
         },
         sequenceNumber: {
-            type: Sequelize.INTEGER,
+            type: Sequelize.INTEGER
         },
         logo: {
-            type: Sequelize.STRING,
+            type: Sequelize.STRING
         },
         label: {
-            type: Sequelize.STRING,
+            type: Sequelize.STRING
         },
         keywords: {
             type: Sequelize.STRING,
@@ -26,7 +27,7 @@ module.exports = (sequelize, Sequelize) => {
             }
         },
         explanation: {
-            type: Sequelize.TEXT,
+            type: Sequelize.TEXT
         }
     });
 

@@ -1,10 +1,11 @@
 module.exports = (sequelize, Sequelize) => {
     const Feature = sequelize.define("feature", {
         sequenceNumber: {
-            type: Sequelize.INTEGER,
+            type: Sequelize.INTEGER
         },
         name: {
             type: Sequelize.STRING,
+            allowNull: false
         }
     });
 
