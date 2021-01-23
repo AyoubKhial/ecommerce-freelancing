@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 export interface ICategory {
     id: number;
@@ -16,7 +17,7 @@ export interface ICategory {
     updatedAt: Date;
 };
 
-const API_URL = "http://localhost:3000/api/categories/";
+const API_URL = `${environment.server}api/categories/`;
 
 @Injectable({
     providedIn: 'root'
