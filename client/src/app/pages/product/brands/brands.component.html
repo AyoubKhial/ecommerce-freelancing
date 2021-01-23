@@ -8,23 +8,21 @@
                     </div>
                     <div class="card-body">
                         <div class="btn-group">
-                            <button type="button" class="btn btn-primary btn-sm"
-                                (click)="getSelectedRows()">SeletedRows</button>
                             <button type="button" class="btn btn-success btn-sm" data-toggle="modal"
                                 data-target="#addBrand">Add</button>
-                            <button type="button" class="btn btn-danger btn-sm">Delete</button>
+                            <button type="button" class="btn btn-danger btn-sm" (click)="remove()">Delete</button>
                         </div>
-
                         <hr class="my-4">
-
                         <ag-grid-angular #agGrid style="width: 100%; height:510px;" class="ag-theme-alpine"
-                            [rowData]="rowData | async" [columnDefs]="columnDefs" [pagination]="true"
-                            [paginationPageSize]="10" rowSelection="multiple" [defaultColDef]="defaultColDef">
+                            [rowData]="brands" [columnDefs]="columnDefs" [pagination]="true" [paginationPageSize]="10"
+                            rowSelection="multiple" [defaultColDef]="defaultColDef"
+                            (selectionChanged)="onSelectionChanged($event)">
                         </ag-grid-angular>
                     </div>
                 </div>
 
-                <div class="modal fade" id="addBrand" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal fade" id="addBrand" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
                     <div class="modal-dialog modal-lg modal-dialog-centered">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -40,7 +38,8 @@
                                         <div class="col-3 d-flex justify-content-between"><label class="sm">First
                                                 Name</label><span>:</span></div>
                                         <div class="col-4">
-                                            <input type="text" class="form-control form-control-sm" name="firstName">
+                                            <input type="text" class="form-control form-control-sm" name="firstName"
+                                                [(ngModel)]="brand.name">
                                         </div><span class="require">*</span>
                                     </div>
                                     <div class="row my-3">
@@ -51,31 +50,36 @@
                                                 value="rozetka.com.ua/api/category/">
                                         </div>
                                         <div class="col-3">
-                                            <input type="text" class="form-control form-control-sm" name="urlId">
+                                            <input type="text" class="form-control form-control-sm" name="urlId"
+                                                [(ngModel)]="brand.url">
                                         </div><span class="fa fa-question"></span>
                                     </div>
                                     <div class="row my-3">
                                         <div class="col-3 d-flex justify-content-between"><label class="sm">Sequence
                                                 No</label><span>:</span></div>
                                         <div class="col-4">
-                                            <input type="text" class="form-control form-control-sm" name="sequence">
+                                            <input type="text" class="form-control form-control-sm" name="sequence"
+                                                [(ngModel)]="brand.sequenceNumber">
                                         </div><span class="require">*</span>
                                     </div>
                                     <div class="row my-3">
-                                        <div class="col-3 d-flex justify-content-between"><label class="sm">Brand Logo</label><span>:</span></div>
+                                        <div class="col-3 d-flex justify-content-between"><label class="sm">Brand
+                                                Logo</label><span>:</span></div>
 
                                         <div class="col-6">
-                                            <input type="file" class="form-control-file border" name="logo">
+                                            <input type="file" class="form-control-file border" id="customFile"
+                                                name="logo" (change)="onFileSelect($event)" #UploadFileInput>
 
                                         </div>
                                     </div>
-                                    
+
                                     <hr>
                                     <div class="row my-3">
                                         <div class="col-3 d-flex justify-content-between"><label class="sm">Label
                                                 Title</label><span>:</span></div>
                                         <div class="col-4">
-                                            <input type="text" class="form-control form-control-sm" name="labelTitle">
+                                            <input type="text" class="form-control form-control-sm" name="labelTitle"
+                                                [(ngModel)]="brand.label">
                                         </div>
                                     </div>
                                     <div class="row my-3">
@@ -83,14 +87,16 @@
                                                 class="sm">Keywords</label><span>:</span></div>
 
                                         <div class="col-7">
-                                            <textarea class="form-control" name="keyword" rows="3"></textarea>
+                                            <textarea class="form-control" name="keyword" rows="3"
+                                                [(ngModel)]="brand.keywords"></textarea>
                                         </div>
                                     </div>
                                     <div class="row my-3">
                                         <div class="col-3 d-flex justify-content-between"><label
                                                 class="sm">Explaination</label><span>:</span></div>
                                         <div class="col-7">
-                                            <textarea class="form-control" name="explaination" rows="3"></textarea>
+                                            <textarea class="form-control" name="explaination" rows="3"
+                                                [(ngModel)]="brand.explanation"></textarea>
                                         </div>
                                     </div>
                                 </form>
@@ -99,7 +105,8 @@
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-secondary btn-sm"
                                         data-dismiss="modal">Cancel</button>
-                                    <button type="button" class="btn btn-primary btn-sm">Save</button>
+                                    <button type="button" class="btn btn-primary btn-sm"
+                                        data-dismiss="modal" (click)="add()">Save</button>
                                 </div>
                             </div>
                         </div>

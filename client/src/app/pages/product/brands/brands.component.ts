@@ -1,63 +1,82 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { AgGridAngular } from 'ag-grid-angular';
+import { BrandService, IBrand } from 'src/app/_services/brand.service';
+import { environment } from 'src/environments/environment';
+import { ImageFormatterComponent } from '../../../_helpers/Image-formatter.component';
 
 @Component({
-  selector: 'app-brands',
-  templateUrl: './brands.component.html',
-  styleUrls: ['./brands.component.css']
+	selector: 'app-brands',
+	templateUrl: './brands.component.html',
+	styleUrls: ['./brands.component.css']
 })
 export class BrandsComponent implements OnInit {
 
-  @ViewChild('agGrid') agGrid: AgGridAngular;
+	@ViewChild('agGrid') agGrid: AgGridAngular;
+	@ViewChild('UploadFileInput', { static: false }) uploadFileInput: ElementRef;
+	
+	defaultColDef = {
+		sortable: true,
+		filter: true,
+		editable: true,
+		resizable: true
+	};
 
-  defaultColDef = {
-    sortable: true,
-    filter: true,
-    editable: true,
-    resizable: true
-  };
+	public columnDefs = [
+		{ field: 'id' },
+		{ field: "sequenceNumber" },
+		{ field: 'name' },
+		{ field: 'label' },
+		{ field: 'keywords' },
+		{ field: 'logo', cellRendererFramework: ImageFormatterComponent }
+	];
 
-  columnDefs = [
-    { field: 'id', checkboxSelection: true, editable: false},
-    { field: "sequenceNo"},
-    { field: 'firstName' },
-    { field: 'showcase' },
-    { field: 'Condition' },
-    { field: 'Upload New Image'}
-  ];
+	public brand: Partial<IBrand> = {};
+	public brands: IBrand[];
+	private file: File;
+	private selectedRows: IBrand[];
 
-  
+	constructor(private brandService: BrandService) { }
 
+	ngOnInit(): void {
+		this.getBrands();
+	}
 
+	public onFileSelect(event: any): void {
+		this.file = event.target.files[0];
+	}
 
-  // rowData = [
-  //   { make: 'Toyota', model: 'Celica', price: 35000 },
-  //   { make: 'Ford', model: 'Mondeo', price: 32000 },
-  //   { make: 'Porsche', model: 'Boxter', price: 72000 }
-  // ];
-  rowData: any;
-  constructor(private http: HttpClient) {
+	public add(): void {
+		this.createBrand(this.brand, this.file);
+	}
 
-  }
+	public onSelectionChanged = (event: any): void => {
+    	this.selectedRows = event.api.getSelectedRows();
+	}
 
-  ngOnInit() {
-    //this.rowData = this.http.get('https://www.ag-grid.com/example-assets/small-row-data.json');
-    this.rowData = this.http.get('http://localhost:8081/assets/data.json');
+	public remove = (): void => {
+		if (this.selectedRows && confirm('Are you sure you want to delete the data selected ?')) {
+			const ids = this.selectedRows.map(row => row.id);
+			for (const id of ids) this.deleteBrand(id);
+			this.brands = this.brands.filter(brand => !ids.includes(brand.id));
+			this.selectedRows = [];
+		}
+	}
 
-  }
+	private getBrands = (): void => {
+		this.brandService.find().subscribe(brands => {
+			brands = brands.map(brand => ({ ...brand, logo: `${environment.server}${brand.logo}` }))
+			this.brands = brands;
+		});
+	}
 
-  getSelectedRows() {
-    const selectedNodes = this.agGrid.api.getSelectedNodes();
-    const selectedData = selectedNodes.map(node => {
-      if (node.groupData) {
-        return { firstName: node.key, model: 'Group' };
-      }
-      return node.data;
-    });
-    const selectedDataStringPresentation = selectedData.map(node => node.firstName).join(', ');
+	private deleteBrand = (id: number): void => {
+		this.brandService.delete(id).subscribe();
+	}
 
-    alert(`Selected nodes: ${selectedDataStringPresentation}`);
-  }
-
+	private createBrand = (brand: Partial<IBrand>, file: File): void => {
+		this.brandService.create(brand, file).subscribe(brand => {
+			brand.logo = `${environment.server}${brand.logo}`;
+			this.brands = [...this.brands, brand];
+		});
+	}
 }
