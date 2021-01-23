@@ -10,7 +10,7 @@ const categoryRoutes = require('./app/category/routes');
 const brandRoutes = require('./app/brand/routes');
 const variantRoutes = require('./app/variant/routes');
 const featureRoutes = require('./app/feature/routes');
-
+const productRoutes = require('./app/product/routes');$
 const app = express();
 
 app.use(cors());
@@ -25,6 +25,7 @@ categoryRoutes(app);
 brandRoutes(app);
 variantRoutes(app);
 featureRoutes(app);
+productRoutes(app);
 connection.sequelize.sync();
 
 if (!fs.existsSync('./public'))fs.mkdirSync('./public');
