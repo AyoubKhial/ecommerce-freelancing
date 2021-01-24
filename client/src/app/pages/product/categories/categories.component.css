@@ -1,10 +1,18 @@
 .main {
     margin-top: 70px;
 }
+
 .search {
     box-shadow: 0 2px 4px #15151571;
   
 }
+
 .ag-center-cols-container{
     width: 100% !important;
+}
+
+.error-message {
+    font-size: 12px;
+    font-weight: 600;
+    color: #ff1f5a;
 }

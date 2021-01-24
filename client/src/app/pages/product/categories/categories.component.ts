@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { AgGridAngular } from 'ag-grid-angular';
 import { CategoryService, ICategory } from 'src/app/_services/category.service';
 
@@ -10,6 +10,7 @@ import { CategoryService, ICategory } from 'src/app/_services/category.service';
 export class CategoriesComponent implements OnInit {
 
 	@ViewChild('agGrid') agGrid: AgGridAngular;
+	@ViewChild('closeModal') closeModal: ElementRef;
 
 	public defaultColDef = {
 		sortable: true,
@@ -29,9 +30,10 @@ export class CategoriesComponent implements OnInit {
 
 	public categories: ICategory[];
 	public category: Partial<ICategory> = {};
+	public errorMessage: string;
 	private selectedRows: ICategory[];
 
-	constructor(private categoryService: CategoryService) {}
+	constructor(private categoryService: CategoryService) { }
 
 	ngOnInit(): void {
 		this.getCategories();
@@ -45,10 +47,18 @@ export class CategoriesComponent implements OnInit {
 	}
 
 	public onSelectionChanged = (event: any): void => {
-    	this.selectedRows = event.api.getSelectedRows();
+		this.selectedRows = event.api.getSelectedRows();
 	}
 
 	public add = (): void => {
+		if (!this.category?.name) {
+			this.errorMessage = 'Please provide the category name.';
+			return;
+		}
+		if (!this.category?.sequenceNumber) {
+			this.errorMessage = 'Please provide the category sequence NO.';
+			return;
+		}
 		this.createCategory(this.category);
 	}
 
@@ -78,6 +88,8 @@ export class CategoriesComponent implements OnInit {
 	private createCategory = (category: Partial<ICategory>): void => {
 		this.categoryService.create(category).subscribe(category => {
 			this.categories = [...this.categories, category];
+			this.errorMessage = '';
+			this.closeModal.nativeElement.click();
 		});
 	}
 }
