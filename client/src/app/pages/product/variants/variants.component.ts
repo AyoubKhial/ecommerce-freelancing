@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { AgGridAngular } from 'ag-grid-angular';
 import { VariantService, IVariant } from 'src/app/_services/variant.service';
 
@@ -10,6 +10,7 @@ import { VariantService, IVariant } from 'src/app/_services/variant.service';
 export class VariantsComponent implements OnInit {
 
 	@ViewChild('agGrid') agGrid: AgGridAngular;
+	@ViewChild('closeModal') closeModal: ElementRef;
 
 	public defaultColDef = {
 		sortable: true,
@@ -27,6 +28,7 @@ export class VariantsComponent implements OnInit {
 
 	public variants: IVariant[];
 	public variant: Partial<IVariant> = {};
+	public errorMessage: string;
 	private selectedRows: IVariant[];
 
 	constructor(private variantService: VariantService) {}
@@ -46,6 +48,14 @@ export class VariantsComponent implements OnInit {
 	}
 
 	public add = (): void => {
+		if (!this.variant?.name) {
+			this.errorMessage = 'Please provide the variant name.';
+			return;
+		}
+		if (!this.variant?.values) {
+			this.errorMessage = 'Please provide the variant values.';
+			return;
+		}
 		this.createVariant(this.variant);
 	}
 
@@ -75,6 +85,8 @@ export class VariantsComponent implements OnInit {
 	private createVariant = (variant: Partial<IVariant>): void => {
 		this.variantService.create(variant).subscribe(variant => {
 			this.variants = [...this.variants, variant];
+			this.errorMessage = '';
+			this.closeModal.nativeElement.click();
 		});
 	}
 }

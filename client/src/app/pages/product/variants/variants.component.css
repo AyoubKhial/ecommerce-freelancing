@@ -8,3 +8,13 @@
 .ag-center-cols-container{
     width: 100% !important;
 }
+
+.require {
+    color: red;
+}
+
+.error-message {
+    font-size: 12px;
+    font-weight: 600;
+    color: #ff1f5a;
+}
