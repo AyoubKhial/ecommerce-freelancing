@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { AgGridAngular } from 'ag-grid-angular';
 import { FeatureService, IFeature } from 'src/app/_services/feature.service';
 
@@ -10,6 +10,7 @@ import { FeatureService, IFeature } from 'src/app/_services/feature.service';
 export class AdditionalFeaturesComponent implements OnInit {
 
 	@ViewChild('agGrid') agGrid: AgGridAngular;
+	@ViewChild('closeModal') closeModal: ElementRef;
 
 	public defaultColDef = {
 		sortable: true,
@@ -27,6 +28,7 @@ export class AdditionalFeaturesComponent implements OnInit {
 
 	public features: IFeature[];
 	public feature: Partial<IFeature> = {};
+	public errorMessage: string;
 	private selectedRows: IFeature[];
 
 	constructor(private featureService: FeatureService) { }
@@ -47,6 +49,10 @@ export class AdditionalFeaturesComponent implements OnInit {
 	}
 
 	public add = (): void => {
+		if (!this.feature?.name) {
+			this.errorMessage = 'Please provide the feature name.';
+			return;
+		}
 		this.createFeature(this.feature);
 	}
 
@@ -76,6 +82,8 @@ export class AdditionalFeaturesComponent implements OnInit {
 	private createFeature = (feature: Partial<IFeature>): void => {
 		this.featureService.create(feature).subscribe(feature => {
 			this.features = [...this.features, feature];
+			this.errorMessage = '';
+			this.closeModal.nativeElement.click();
 		});
 	}
 }
