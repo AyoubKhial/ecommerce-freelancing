@@ -13,6 +13,7 @@ export class BrandsComponent implements OnInit {
 
 	@ViewChild('agGrid') agGrid: AgGridAngular;
 	@ViewChild('UploadFileInput', { static: false }) uploadFileInput: ElementRef;
+	@ViewChild('closeModal') closeModal: ElementRef;
 	
 	defaultColDef = {
 		sortable: true,
@@ -32,6 +33,7 @@ export class BrandsComponent implements OnInit {
 
 	public brand: Partial<IBrand> = {};
 	public brands: IBrand[];
+	public errorMessage: string;
 	private file: File;
 	private selectedRows: IBrand[];
 
@@ -46,6 +48,14 @@ export class BrandsComponent implements OnInit {
 	}
 
 	public add(): void {
+		if (!this.brand?.name) {
+			this.errorMessage = 'Please provide the brand name.';
+			return;
+		}
+		if (!this.brand?.sequenceNumber) {
+			this.errorMessage = 'Please provide the brand sequence NO.';
+			return;
+		}
 		this.createBrand(this.brand, this.file);
 	}
 
@@ -77,6 +87,8 @@ export class BrandsComponent implements OnInit {
 		this.brandService.create(brand, file).subscribe(brand => {
 			brand.logo = `${environment.server}${brand.logo}`;
 			this.brands = [...this.brands, brand];
+			this.errorMessage = '';
+			this.closeModal.nativeElement.click();
 		});
 	}
 }

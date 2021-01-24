@@ -40,7 +40,6 @@ export class CategoriesComponent implements OnInit {
 	}
 
 	public onCellValueChanged = (event: any): void => {
-		console.log(event);
 		const id = event.data.id;
 		const data = { [event.colDef.field]: event.newValue };
 		this.updateCategory(id, data);
