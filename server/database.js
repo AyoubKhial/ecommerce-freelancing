@@ -49,4 +49,30 @@ db.features.belongsToMany(db.products, {
     foreignKey: "featureId"
 });
 
+(async () => {
+    await db.variants.findOrCreate({
+        where: { name: 'Body size' },
+        defaults: {
+            name: 'Body size',
+            values: 'XS,S,M,L,XL'
+        }
+    });
+    await db.variants.findOrCreate({
+        where: { name: 'Color' },
+        defaults: {
+            name: 'Color',
+            values: 'RED,GREEN,BLUE,WHITE,BLACK'
+        }
+    });
+    await db.variants.findOrCreate({
+        where: { name: 'Capacity' },
+        defaults: {
+            name: 'Capacity',
+            values: '64 GB, 256 GB'
+        }
+    });
+})();
+
+
+
 module.exports = db;
