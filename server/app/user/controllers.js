@@ -5,8 +5,12 @@ const User = database.users;
 const Op = database.Sequelize.Op;
 
 const register = async (req, res) => {
-    const user = await User.create(req.body);
-    return service.sendTokenResponse({ user, statusCode: 201, res });
+    try {
+        const user = await User.create(req.body);
+        return service.sendTokenResponse({ user, statusCode: 201, res });
+    } catch(err) {
+        res.status(401).send({});
+    }
 };
 
 const login = async (req, res) => {
