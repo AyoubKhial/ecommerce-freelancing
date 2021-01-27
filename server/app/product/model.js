@@ -1,19 +1,11 @@
 module.exports = (sequelize, Sequelize) => {
     const Product = sequelize.define("product", {
         category: {
-            type: Sequelize.INTEGER,
-            allowNull: false,
-            references: {
-                model: "categories",
-                key: "id"
-            }
+            type: Sequelize.STRING,
+            allowNull: false
         },
         brand: {
-            type: Sequelize.INTEGER,
-            references: {
-                model: "brands",
-                key: "id"
-            }
+            type: Sequelize.STRING
         },
         name: {
             type: Sequelize.STRING,
@@ -27,19 +19,19 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.BOOLEAN
         },
         vtaUnit: {
-            type: Sequelize.INTEGER
+            type: Sequelize.STRING
         },
         stockCode: {
             type: Sequelize.STRING
         },
         barCode: {
-            type: Sequelize.BOOLEAN
+            type: Sequelize.STRING
         },
-        stockQuantity: {
+        quantity: {
             type: Sequelize.INTEGER
         },
         quantityUnit: {
-            type: Sequelize.INTEGER
+            type: Sequelize.STRING
         },
         cargoWeight: {
             type: Sequelize.FLOAT
@@ -83,6 +75,9 @@ module.exports = (sequelize, Sequelize) => {
         productFeature: {
             type: Sequelize.STRING
         },
+        featureValue: {
+            type: Sequelize.STRING
+        },
         moreInformation: {
             type: Sequelize.TEXT
         },
@@ -90,7 +85,7 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.TEXT
         },
         privateInformationArea: {
-            type: Sequelize.FLOAT
+            type: Sequelize.BOOLEAN
         },
         hood: {
             type: Sequelize.STRING
@@ -166,6 +161,56 @@ module.exports = (sequelize, Sequelize) => {
                 else this.setDataValue("combinedProducts", val);
             }
         },
+        variant1: {
+            type: Sequelize.STRING,
+            get() {
+                return this.getDataValue("variant1")?.split(",");
+            },
+            set(val) {
+                if (Array.isArray(val)) this.setDataValue("variant1", val.join(","));
+                else this.setDataValue("variant1", val);
+            }
+        },
+        variant2: {
+            type: Sequelize.STRING,
+            get() {
+                return this.getDataValue("variant2")?.split(",");
+            },
+            set(val) {
+                if (Array.isArray(val)) this.setDataValue("variant2", val.join(","));
+                else this.setDataValue("variant2", val);
+            }
+        },
+        variant3: {
+            type: Sequelize.STRING,
+            get() {
+                return this.getDataValue("variant3")?.split(",");
+            },
+            set(val) {
+                if (Array.isArray(val)) this.setDataValue("variant3", val.join(","));
+                else this.setDataValue("variant3", val);
+            }
+        },
+        variant4: {
+            type: Sequelize.STRING,
+            get() {
+                return this.getDataValue("variant4")?.split(",");
+            },
+            set(val) {
+                if (Array.isArray(val)) this.setDataValue("variant4", val.join(","));
+                else this.setDataValue("variant4", val);
+            }
+        },
+        variant5: {
+            type: Sequelize.STRING,
+            get() {
+                return this.getDataValue("variant5")?.split(",");
+            },
+            set(val) {
+                if (Array.isArray(val)) this.setDataValue("variant5", val.join(","));
+                else this.setDataValue("variant5", val);
+            }
+        },
         productPageTitle: {
             type: Sequelize.STRING
         },
@@ -193,16 +238,16 @@ module.exports = (sequelize, Sequelize) => {
             }
         },
         countdownFeature: {
-            type: Sequelize.BOOLEAN
+            type: Sequelize.STRING
         },
         countdownStart: {
-            type: Sequelize.INTEGER
+            type: Sequelize.BIGINT
         },
         countdownEnd: {
-            type: Sequelize.INTEGER
+            type: Sequelize.BIGINT
         },
         throwProduct: {
-            type: Sequelize.INTEGER
+            type: Sequelize.BIGINT
         },
         customize: {
             type: Sequelize.STRING,

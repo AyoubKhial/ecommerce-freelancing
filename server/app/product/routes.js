@@ -17,7 +17,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 module.exports = app => {
-    app.post("/api/products", upload.array('files'),controller.create);
+    app.post("/api/products", upload.single("file"), controller.create);
     app.get("/api/products", controller.find);
     app.get("/api/products/:id", controller.findById);
     app.put("/api/products/:id", controller.updateById);

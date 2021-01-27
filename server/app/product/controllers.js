@@ -3,8 +3,17 @@ const database = require('../../database');
 const Product = database.products;
 
 const create = async (req, res) => {
-    const product = await Product.create(req.body);
-    res.status(201).send(product);
+    if (req.body.data) {
+        const data = JSON.parse(req.body.data);
+        const pictureField = `picture${data.index + 1}`;
+        if (req.file) data[pictureField] = req.file.filename;
+        const count = await Product.count({ where: { name: data.name } });
+        if (!count) await Product.create(data);
+        else await Product.update(data, { where: { name: data.name }});
+    } else {
+        await Product.create(req.body);
+    }
+    res.status(201).send({ message: 'updated Successfully' });
 };
 
 const find = async (req, res) => {

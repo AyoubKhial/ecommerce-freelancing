@@ -98,6 +98,8 @@ import { IdeaOutputComponent } from './pages/integrations/idea-output/idea-outpu
 import { MarketplaceComponent } from './pages/integrations/marketplace/marketplace.component';
 import { ImageFormatterComponent } from './_helpers/Image-formatter.component';
 import { VariantsComponent } from './pages/product/variants/variants.component';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 @NgModule({
   declarations: [
@@ -196,6 +198,8 @@ import { VariantsComponent } from './pages/product/variants/variants.component';
     HttpClientModule,
     NgxDatatableModule,
     NgxEditorModule,
+    NgSelectModule,
+    CKEditorModule,
     AgGridModule.withComponents([ImageFormatterComponent])
     
   ],
