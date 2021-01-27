@@ -1,41 +1,31 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, RouteReuseStrategy } from '@angular/router';
-import { AuthService } from '../../_services/auth.service';
+import { Router } from '@angular/router';
+import { AuthService, IUser } from '../../_services/auth.service';
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+	selector: 'app-register',
+	templateUrl: './register.component.html',
+	styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  form: any = {
-    username: null,
-    email: null,
-    password: null
-  };
-  isSuccessful = false;
-  isSignUpFailed = false;
-  errorMessage = '';
 
-  constructor(private authService: AuthService, private router: Router) { }
+	public user: IUser = {};
+	public errorMessage: string;
 
-  ngOnInit(): void {
-  }
+	constructor(private authService: AuthService, private router: Router) { }
 
-  onSubmit(): void {
-    const { username, email, password } = this.form;
+	ngOnInit(): void {
+	}
 
-    this.authService.register(username, email, password).subscribe(
-      data => {
-        console.log(data);
-        this.isSuccessful = true;
-        this.isSignUpFailed = false;
-        this.router.navigateByUrl('login');
-      },
-      err => {
-        this.errorMessage = err.error.message;
-        this.isSignUpFailed = true;
-      }
-    );
-  }
+	onSubmit(): void {
+		if (!this.user.firstName) this.errorMessage = 'The first name field is required';
+		if (!this.user.lastName) this.errorMessage = 'The last name field is required';
+		if (!this.user.username) this.errorMessage = 'The user name field is required';
+		if (!this.user.email) this.errorMessage = 'The email field is required';
+		if (!this.user.password) this.errorMessage = 'The password field is required';
+		this.authService.register(this.user).subscribe(
+			res => this.router.navigateByUrl('login'),
+			err => this.errorMessage = 'username or email already exists.'
+		);
+	}
 }
