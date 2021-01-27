@@ -1,5 +1,6 @@
 const controller = require('./controllers');
 const multer = require("multer");
+const auth = require('../../middleware/auth');
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -17,9 +18,9 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 module.exports = app => {
-    app.post("/api/products", upload.single("file"), controller.create);
-    app.get("/api/products", controller.find);
-    app.get("/api/products/:id", controller.findById);
-    app.put("/api/products/:id", controller.updateById);
-    app.delete("/api/products/:id", controller.deleteById);
+    app.post("/api/products", auth, upload.single("file"), controller.create);
+    app.get("/api/products", auth, controller.find);
+    app.get("/api/products/:id", auth, controller.findById);
+    app.put("/api/products/:id", auth, controller.updateById);
+    app.delete("/api/products/:id", auth, controller.deleteById);
 };

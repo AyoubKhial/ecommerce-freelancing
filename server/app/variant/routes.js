@@ -1,9 +1,10 @@
 const controller = require('./controllers');
+const auth = require('../../middleware/auth');
 
 module.exports = app => {
-    app.post("/api/variants", controller.create);
-    app.get("/api/variants", controller.find);
-    app.get("/api/variants/:id", controller.findById);
-    app.put("/api/variants/:id", controller.updateById);
-    app.delete("/api/variants/:id", controller.deleteById);
+    app.post("/api/variants", auth, controller.create);
+    app.get("/api/variants", auth, controller.find);
+    app.get("/api/variants/:id", auth, controller.findById);
+    app.put("/api/variants/:id", auth, controller.updateById);
+    app.delete("/api/variants/:id", auth, controller.deleteById);
 };
