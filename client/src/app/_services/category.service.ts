@@ -30,6 +30,10 @@ export class CategoryService {
         return this.http.get<ICategory[]>(API_URL);
     }
 
+    findById(id: string): Observable<ICategory> {
+        return this.http.get<ICategory>(API_URL + id);
+    }
+
     create(data: Partial<ICategory>): Observable<ICategory> {
         return this.http.post<ICategory>(API_URL, data);
     }

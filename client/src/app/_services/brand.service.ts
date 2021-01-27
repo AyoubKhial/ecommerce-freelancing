@@ -36,6 +36,10 @@ export class BrandService {
         return this.http.get<IBrand[]>(API_URL);
     }
 
+    findById(id: string): Observable<IBrand> {
+        return this.http.get<IBrand>(API_URL + id);
+    }
+
     delete(id: number): Observable<{ message: string }> {
         return this.http.delete<{ message: string }>(`${API_URL}${id}`);
     }

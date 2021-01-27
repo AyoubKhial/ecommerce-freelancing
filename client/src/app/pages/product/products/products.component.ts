@@ -1,62 +1,78 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { Router } from '@angular/router';
+import { ProductService } from 'src/app/_services/product.service';
+import { BrandService } from 'src/app/_services/brand.service';
+import { CategoryService } from 'src/app/_services/category.service';
+import { DomSanitizer } from '@angular/platform-browser';
+import { environment } from 'src/environments/environment';
 
-@Component({ 
-  selector: 'app-products',
-  templateUrl: './products.component.html',
-  styleUrls: ['./products.component.css']
+@Component({
+	selector: 'app-products',
+	templateUrl: './products.component.html',
+	styleUrls: ['./products.component.css']
 })
 export class ProductsComponent implements OnInit {
-  
-  @ViewChild('myTable') table: DatatableComponent;
-  @ViewChild('DataTableComponent') myFilterTable: DatatableComponent;
 
-  constructor(private router: Router) { }
+	@ViewChild('myTable') table: DatatableComponent;
+	@ViewChild('DataTableComponent') myFilterTable: DatatableComponent;
+	public products: any[];
 
-  title = 'angular-datatables';
+	constructor(private router: Router, private productService: ProductService, private categoryService: CategoryService, private brandService: BrandService, private sanitizer: DomSanitizer) { }
 
-  temp = [];
-  rows = [];
+	title = 'angular-datatables';
 
-  ngOnInit() {
-    this.fetch((data) => {
+	temp = [];
+	rows = [];
 
-      //cache our list
-      this.temp = [...data];
-      //push our initial complete list
-      this.rows = data;
-    });
-    // this.table.offset = 0;
-  }
+	ngOnInit() {
+		this.getProducts();
+		this.fetch((data) => {
+			this.temp = [...data];
+			this.rows = data;
+		});
+	}
 
-  fetch(cb) {
-    const req = new XMLHttpRequest();
-    req.open('GET', `http://swimlane.github.io/ngx-datatable/assets/data/company.json`);
+	private getProducts = () => {
+		this.productService.find().subscribe(products => {
+			for (const product of products) {
+				this.categoryService.findById(product.category).subscribe(category => {
+					product.category = category.name;
+					this.brandService.findById(product.brand).subscribe(brand => {
+						product.brand = brand.name;
+						this.products = products
+					});
+				});
+			}
+		})
+	}
 
-    req.onload = () => {
-      const data = JSON.parse(req.response);
-      cb(data);
-    };
+	fetch(cb) {
+		const req = new XMLHttpRequest();
+		req.open('GET', `http://swimlane.github.io/ngx-datatable/assets/data/company.json`);
 
-    req.send();
-  }
+		req.onload = () => {
+			const data = JSON.parse(req.response);
+			console.log(data);
+			cb(data);
+		};
 
-  updateFilter(event) {
-    const val = event.target.value.toLowerCase();
+		req.send();
+	}
 
-    // filter our data
-    const temp = this.temp.filter(function (d) {
-      return d.name.toLowerCase().indexOf(val) !== -1 || !val;
-    });
+	updateFilter(event) {
+		const val = event.target.value.toLowerCase();
+		const temp = this.temp.filter(function (d) {
+			return d.name.toLowerCase().indexOf(val) !== -1 || !val;
+		});
+		this.rows = temp;
+	}
 
-    // update the rows
-    this.rows = temp;
-    // Whenever the filter changes, always go back to the first page
-    // this.myFilterTable.offset = 0;
-  }
+	gotoAddingProduct() {
+		this.router.navigateByUrl('addingProduct')
+	}
 
-  gotoAddingProduct() {
-    this.router.navigateByUrl('addingProduct')
-  }
+	getSafeUrl(url) {
+        return this.sanitizer.bypassSecurityTrustResourceUrl(environment.server + url);
+    }
 }

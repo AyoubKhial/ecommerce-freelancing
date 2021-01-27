@@ -9,13 +9,13 @@ import { DomSanitizer } from "@angular/platform-browser";
 export class ImageFormatterComponent {
     params: any;
 
-    constructor(private sanitizer: DomSanitizer) {}
+    constructor(private sanitizer: DomSanitizer) { }
 
     agInit(params: any) {
         this.params = params;
     }
 
     getSafeUrl() {
-        return this.sanitizer.bypassSecurityTrustResourceUrl(this.params.value);     
-}
+        return this.sanitizer.bypassSecurityTrustResourceUrl(this.params.value);
+    }
 }
