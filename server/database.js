@@ -7,6 +7,7 @@ const Brand = require('./app/brand/model');
 const Variant = require('./app/variant/model');
 const Feature = require('./app/feature/model');
 const Product = require('./app/product/model');
+const User = require('./app/user/model');
 
 const sequelize = new Sequelize(config.name, config.user, config.password, {
     host: config.host,
@@ -24,6 +25,7 @@ db.brands = Brand(sequelize, Sequelize);
 db.variants = Variant(sequelize, Sequelize);
 db.features = Feature(sequelize, Sequelize);
 db.products = Product(sequelize, Sequelize);
+db.users = User(sequelize, Sequelize);
 
 /* db.products.belongsToMany(db.features, {
     through: "product_feature",
