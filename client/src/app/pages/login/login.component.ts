@@ -1,55 +1,27 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../_services/auth.service';
-import { TokenStorageService } from '../../_services/token-storage.service';
 import { Router } from '@angular/router';
+import { AuthService, IUser } from '../../_services/auth.service';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+	selector: 'app-login',
+	templateUrl: './login.component.html',
+	styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  form: any = {
-    username: null,
-    password: null
-  };
-  isLoggedIn = false;
-  isLoginFailed = false;
-  errorMessage = '';
-  roles: string[] = [];
 
-  constructor(private authService: AuthService, private tokenStorage: TokenStorageService, private router: Router) { }
+	public user: IUser = {};
+	public errorMessage: string;
 
-  ngOnInit(): void {
-    if (this.tokenStorage.getToken()) {
-      this.isLoggedIn = true;
-      this.roles = this.tokenStorage.getUser().roles;
-    }
-  }
+	constructor(private authService: AuthService, private router: Router) { }
 
-  onSubmit(): void {
-    const { username, password } = this.form;
-    console.log('asdfasdfasdfs')
-    this.authService.login(username, password).subscribe(
-      data => {
-        this.tokenStorage.saveToken(data.accessToken);
-        this.tokenStorage.saveUser(data);
+	ngOnInit(): void {
+	}
 
-        this.isLoginFailed = false;
-        this.isLoggedIn = true;
-        this.roles = this.tokenStorage.getUser().roles;
-        this.goHomePage();
-      },
-      err => {
-        this.errorMessage = err.error.message;
-        this.isLoginFailed = true;
-      }
-    );
-  }
-
-  goHomePage(): void {
-    // window.location.reload();
-    this.router.navigateByUrl('home')
-    
-  }
+	onSubmit(): void {
+		if (!this.user.email) this.errorMessage = 'The email field is required';
+		if (!this.user.password) this.errorMessage = 'The password field is required';
+		this.authService.login(this.user).subscribe(res => {
+			console.log(res);
+		});
+	}
 }
