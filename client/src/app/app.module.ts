@@ -1,11 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { AppRoutingModule } from './app-routing.module';
 import { NgxEditorModule } from 'ngx-editor';
-import { AgGridModule } from 'ag-grid-angular'; 
+import { AgGridModule } from 'ag-grid-angular';
 import 'ag-grid-enterprise';
 
 import { AppComponent } from './app.component';
@@ -17,7 +17,7 @@ import { BoardAdminComponent } from './pages/board-admin/board-admin.component';
 import { BoardModeratorComponent } from './pages/board-moderator/board-moderator.component';
 import { BoardUserComponent } from './pages/board-user/board-user.component';
 
-import { authInterceptorProviders } from './_helpers/auth.interceptor';
+import { AuthInterceptor } from './_helpers/auth.interceptor';
 
 import { ProductsComponent } from './pages/product/products/products.component';
 import { AddNewProductComponent } from './pages/product/add-new-product/add-new-product.component';
@@ -100,6 +100,7 @@ import { ImageFormatterComponent } from './_helpers/Image-formatter.component';
 import { VariantsComponent } from './pages/product/variants/variants.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { JwtInterceptor } from './_helpers/jwt.interceptor';
 
 @NgModule({
   declarations: [
@@ -201,9 +202,20 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
     NgSelectModule,
     CKEditorModule,
     AgGridModule.withComponents([ImageFormatterComponent])
-    
+
   ],
-  providers: [authInterceptorProviders],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,48 +1,54 @@
 import { Injectable } from '@angular/core';
 
 const TOKEN_KEY = "auth-token";
-const USER_KEY = "auth-user";
 
 @Injectable({
-  providedIn: 'root'
+	providedIn: 'root'
 })
 export class TokenStorageService {
-  isLoggedIn: boolean = false;
-  constructor() { }
 
-  signOut(): void {
-    window.sessionStorage.clear();
-    this.isLoggedIn = false;
-  }
+	isLoggedIn: boolean = false;
 
-  public saveToken(token: string): void {
-    window.sessionStorage.removeItem(TOKEN_KEY);
-    window.sessionStorage.setItem(TOKEN_KEY, token);
-    this.isLoggedIn = true;
-  }
+	constructor() { }
 
-  public getToken(): string | null {
-    return window.sessionStorage.getItem(TOKEN_KEY);
-    
-  }
+	public setToken = (token: string): void => {
+		localStorage.setItem(TOKEN_KEY, token);
+	}
 
-  public saveUser(user: any): void {
-    window.sessionStorage.removeItem(USER_KEY);
-    window.sessionStorage.setItem(USER_KEY, JSON.stringify(user));
-    this.isLoggedIn = true;
-  }
+	public getToken = (): string => {
+		return localStorage.getItem(TOKEN_KEY);
+	}
 
-  public getUser(): any {
-    const user = window.sessionStorage.getItem(USER_KEY);
-    if (user) {
-      return JSON.parse(user);
-      
-    }
-    
-    return {};
-  }
+	/* signOut(): void {
+		window.sessionStorage.clear();
+		this.isLoggedIn = false;
+	}
 
+	public saveToken(token: string): void {
+		window.sessionStorage.removeItem(TOKEN_KEY);
+		window.sessionStorage.setItem(TOKEN_KEY, token);
+		this.isLoggedIn = true;
+	}
 
+	public getToken(): string | null {
+		return window.sessionStorage.getItem(TOKEN_KEY);
 
+	}
+
+	public saveUser(user: any): void {
+		window.sessionStorage.removeItem(USER_KEY);
+		window.sessionStorage.setItem(USER_KEY, JSON.stringify(user));
+		this.isLoggedIn = true;
+	}
+
+	public getUser(): any {
+		const user = window.sessionStorage.getItem(USER_KEY);
+		if (user) {
+			return JSON.parse(user);
+
+		}
+
+		return {};
+	} */
 
 }

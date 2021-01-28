@@ -23,7 +23,7 @@ export class AppComponent implements OnInit {
   title = "front";
 
   ngOnInit(): void {
-    this.isLoggedIn = !!this.tokenStorageService.getToken();
+    /* this.isLoggedIn = !!this.tokenStorageService.getToken();
 
     if (this.isLoggedIn) {
       const user = this.tokenStorageService.getUser();
@@ -138,18 +138,18 @@ export class AppComponent implements OnInit {
         {id: 'marketplaceIntegration', childName: 'Marketplace Integration'}
       ])
     ];
-    this.show_subnav_content(this.paths[0]);
+    this.show_subnav_content(this.paths[0]); */
 
   }
 
   logout(): void {
-    this.tokenStorageService.signOut();
-    window.location.reload();
+    /* this.tokenStorageService.signOut();
+    window.location.reload(); */
   }
 
   show_subnav_content(path:any){
-    this.showCase = true;
+    /* this.showCase = true;
     this.activeBtn = path.parent;
-    this.showPath = path.child;
+    this.showPath = path.child; */
   }
 }
